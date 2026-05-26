@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Careers.css';
 
 // ── Config ───────────────────────────────────────────────────────────────────
-const API_URL = 'http://127.0.0.1:5000';
+const API_URL = 'https://admin.rudhisoft.com';
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const whyJoinCards = [
