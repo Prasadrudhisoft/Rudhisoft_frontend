@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Contact.css';
+import './contact.css';
 
 // ── Config ────────────────────────────────────────────────────────────────────
 const API_URL = 'https://admin.rudhisoft.com';

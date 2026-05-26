@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import axios from 'axios';
-import './Careers.css';
+import './careers.css';
 
 // ── Config ───────────────────────────────────────────────────────────────────
 const API_URL = 'https://admin.rudhisoft.com';
