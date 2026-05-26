@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import './Technology.css';
+import './technology.css';
 
 // ── Data ────────────────────────────────────────────────────────────────────
 
