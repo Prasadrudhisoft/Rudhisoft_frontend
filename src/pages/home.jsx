@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import './home.css';
 import heroBg from '../assets/images/hero-bg.jpg';
 import about from '../assets/images/about-us.jpg';
-
+import techBgVideo from '../assets/videos/Tech-bg.mp4';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const services = [
@@ -140,7 +140,6 @@ export default function HomePage() {
       {/* HERO */}
       <section className="rs-hero" id="home" ref={heroRef}>
         <div className="rs-hero-bg">
-          {/* ✅ FIX: heroBg import applied as inline style so Vite resolves it correctly */}
           <div
             className="rs-hero-bg-image"
             style={{ backgroundImage: `url(${heroBg})` }}
@@ -216,8 +215,11 @@ export default function HomePage() {
             </div>
             <div className="rs-about-visual rs-reveal-right">
               <div className="rs-about-image-wrapper">
-                <img src="/static/images/about-us.jpg" alt="RUDHISOFT Team"
-                  onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=450&fit=crop"; }} />
+                <img
+                  src={about}
+                  alt="RUDHISOFT Team"
+                  onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=450&fit=crop"; }}
+                />
               </div>
               <div className="rs-about-float-card">
                 <div className="rs-about-float-icon">🏆</div>
@@ -298,7 +300,7 @@ export default function HomePage() {
       <section className="rs-technology" id="technology">
         <div className="rs-tech-bg">
           <video autoPlay muted loop playsInline>
-            <source src="/static/Videos/Tech-bg.mp4" type="video/mp4" />
+            <source src={techBgVideo} type="video/mp4" />
           </video>
         </div>
         <div className="rs-tech-overlay" />
