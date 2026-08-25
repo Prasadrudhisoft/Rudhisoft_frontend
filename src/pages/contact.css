@@ -183,7 +183,10 @@ nav { display: flex; align-items: center; }
 .page-hero {
   position: relative; padding: 160px 0 100px; min-height: 70vh;
   display: flex; align-items: center; overflow: hidden;
-  background: url("/static/images/contact-bg.jpg") center / cover no-repeat; color: white;
+  /* ⚠️ contact-bg.jpg was referenced but never supplied — using a brand gradient
+     until a real photo is added. Drop the image at src/assets/images/contact-bg.jpg
+     and swap the line below for: background: url("../assets/images/contact-bg.jpg") center / cover no-repeat; */
+  background: var(--primary-gradient, linear-gradient(135deg, #2e3192 0%, #1a1d5a 100%)); color: white;
 }
 .page-hero::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;

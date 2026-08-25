@@ -317,7 +317,7 @@ nav { display: flex; align-items: center; }
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: url("/static/images/Tech-Bg.jpg") center / cover no-repeat;
+  background: url("../assets/images/Tech-Bg.jpg") center / cover no-repeat;
   color: white;
 }
 .page-hero::before {

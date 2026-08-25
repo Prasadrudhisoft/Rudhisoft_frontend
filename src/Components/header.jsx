@@ -1,30 +1,56 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
+import { FaGraduationCap, FaHardHat, FaHospital, FaLock, FaIndustry } from 'react-icons/fa';
 import "./header.css";
 
 const NAV_LINKS = [
-  { label: "Home",       href: "/"           },
-  { label: "About",      href: "/about"      },
-  { label: "Services",   href: "/services"   },
-  { label: "Technology", href: "/technology" },
-  { label: "Careers",    href: "/careers"    },
+  { label: "Home",         href: "/"             },
+  { label: "About",        href: "/about"        },
+  { label: "Services",     href: "/services"     },
+  { label: "Technology",   href: "/technology"   },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Blog",         href: "/blog"         },
+  { label: "Careers",      href: "/careers"      },
+];
+
+const PRODUCT_LINKS = [
+  { label: "RudhiCore",                     icon: <FaGraduationCap />, href: "/products/rudhicore-school-college-management", blurb: "School & college management" },
+  { label: "RudhiArch",                     icon: <FaHardHat />,       href: "/products/rudhiarch-construction-site-erp",      blurb: "Construction site ERP" },
+  { label: "Hospital Management System",    icon: <FaHospital />,      href: "/products/hospital-management-system",           blurb: "Hospital & clinic management" },
+  { label: "Industrial Gate In-Out System", icon: <FaLock />,          href: "/products/industry-security-system",             blurb: "Industrial access & security" },
+];
+
+const INDUSTRY_LINKS = [
+  { label: "Education",                   icon: <FaGraduationCap />, href: "/industries/education-school-college-management", blurb: "Schools & colleges" },
+  { label: "Construction & Infrastructure", icon: <FaHardHat />,      href: "/industries/construction-site-management",        blurb: "Contractors & site teams" },
+  { label: "Healthcare",                  icon: <FaHospital />,       href: "/industries/hospital-clinic-management",           blurb: "Clinics & hospitals" },
+  { label: "Manufacturing & Industrial",  icon: <FaIndustry />,       href: "/industries/manufacturing-industrial-security",   blurb: "Factories & warehouses" },
 ];
 
 export default function Header() {
   const location  = useLocation();
   const activeLink = location.pathname;
 
-  // ✅ true only on homepage
+  // ✅ true on homepage
   const isHome = location.pathname === "/";
+
+  // ✅ true on any page whose hero has a dark video/gradient background
+  // (currently: the 4 Industry pages) — these also need white nav text
+  // before scrolling, same as the homepage.
+  const hasDarkHero = isHome || location.pathname.startsWith("/industries/");
 
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
+  const [industriesOpen, setIndustriesOpen] = useState(false);
 
   // ── Close menu on route change ────────────────────────────────────
   useEffect(() => {
     setMenuOpen(false);
+    setProductsOpen(false);
+    setIndustriesOpen(false);
   }, [location.pathname]);
 
   // ── Scroll detection ──────────────────────────────────────────────
@@ -76,16 +102,18 @@ export default function Header() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [menuOpen]);
 
-  const closeMenu  = () => setMenuOpen(false);
+  const closeMenu  = () => { setMenuOpen(false); setProductsOpen(false); setIndustriesOpen(false); };
   const toggleMenu = () => setMenuOpen((prev) => !prev);
+  const toggleProducts = () => setProductsOpen((prev) => !prev);
+  const toggleIndustries = () => setIndustriesOpen((prev) => !prev);
 
-  // ✅ "transparent" class only on home + not scrolled = white text
-  // "scrolled" = white backdrop + dark/gray text (all pages)
-  // no special class = other pages = dark text by default
+  // ✅ "transparent" class on home + industry pages (dark hero) while not
+  // scrolled = white text. "scrolled" = white backdrop + dark/gray text
+  // (all pages). No special class = other pages = dark text by default.
   const headerClass = [
     "header",
-    scrolled             ? "scrolled"    : "",
-    isHome && !scrolled  ? "transparent" : "",
+    scrolled                   ? "scrolled"    : "",
+    hasDarkHero && !scrolled   ? "transparent" : "",
   ].filter(Boolean).join(" ");
 
   return (
@@ -104,7 +132,7 @@ export default function Header() {
         <div className="header-container">
 
           {/* ── Logo ───────────────────────────────────────── */}
-          <a href="/" className="logo" aria-label="RUDHISOFT — go to homepage">
+          <Link to="/" className="logo" aria-label="RUDHISOFT — go to homepage">
             <div className="logo-icon">
               {!logoError ? (
                 <img src={logo} alt="" aria-hidden="true" onError={() => setLogoError(true)} />
@@ -113,7 +141,7 @@ export default function Header() {
               )}
             </div>
             <span className="logo-text">RUDHISOFT</span>
-          </a>
+          </Link>
 
           {/* ── Navigation ─────────────────────────────────── */}
           <nav aria-label="Main navigation">
@@ -124,22 +152,96 @@ export default function Header() {
             >
               {NAV_LINKS.map(({ label, href }) => (
                 <li key={href} role="listitem">
-                  <a
-                    href={href}
+                  <Link
+                    to={href}
                     className={activeLink === href ? "active" : ""}
                     aria-current={activeLink === href ? "page" : undefined}
                     onClick={closeMenu}
                   >
                     {label}
-                  </a>
+                  </Link>
                 </li>
               ))}
 
+              {/* ── Our Products dropdown ─────────────────────── */}
+              <li
+                className={`nav-dropdown${productsOpen ? " open" : ""}`}
+                role="listitem"
+                onMouseEnter={() => setProductsOpen(true)}
+                onMouseLeave={() => setProductsOpen(false)}
+              >
+                <button
+                  type="button"
+                  className={`nav-dropdown-trigger${PRODUCT_LINKS.some(p => p.href === activeLink) ? " active" : ""}`}
+                  onClick={toggleProducts}
+                  aria-haspopup="true"
+                  aria-expanded={productsOpen}
+                >
+                  Our Products
+                  <span className="nav-dropdown-caret" aria-hidden="true">▾</span>
+                </button>
+                <ul className={`nav-dropdown-menu${productsOpen ? " active" : ""}`} role="list">
+                  {PRODUCT_LINKS.map(({ label, icon, href, blurb }) => (
+                    <li key={href} role="listitem">
+                      <Link
+                        to={href}
+                        className={activeLink === href ? "active" : ""}
+                        aria-current={activeLink === href ? "page" : undefined}
+                        onClick={closeMenu}
+                      >
+                        <span className="nav-dropdown-icon" aria-hidden="true">{icon}</span>
+                        <span className="nav-dropdown-text">
+                          <span className="nav-dropdown-label">{label}</span>
+                          <span className="nav-dropdown-blurb">{blurb}</span>
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+
+              {/* ── Industries dropdown ─────────────────────── */}
+              <li
+                className={`nav-dropdown${industriesOpen ? " open" : ""}`}
+                role="listitem"
+                onMouseEnter={() => setIndustriesOpen(true)}
+                onMouseLeave={() => setIndustriesOpen(false)}
+              >
+                <button
+                  type="button"
+                  className={`nav-dropdown-trigger${INDUSTRY_LINKS.some(i => i.href === activeLink) ? " active" : ""}`}
+                  onClick={toggleIndustries}
+                  aria-haspopup="true"
+                  aria-expanded={industriesOpen}
+                >
+                  Industries
+                  <span className="nav-dropdown-caret" aria-hidden="true">▾</span>
+                </button>
+                <ul className={`nav-dropdown-menu${industriesOpen ? " active" : ""}`} role="list">
+                  {INDUSTRY_LINKS.map(({ label, icon, href, blurb }) => (
+                    <li key={href} role="listitem">
+                      <Link
+                        to={href}
+                        className={activeLink === href ? "active" : ""}
+                        aria-current={activeLink === href ? "page" : undefined}
+                        onClick={closeMenu}
+                      >
+                        <span className="nav-dropdown-icon" aria-hidden="true">{icon}</span>
+                        <span className="nav-dropdown-text">
+                          <span className="nav-dropdown-label">{label}</span>
+                          <span className="nav-dropdown-blurb">{blurb}</span>
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+
               <li className="nav-cta" role="listitem">
-                <a href="/contact" className="btn-nav" onClick={closeMenu}>
+                <Link to="/contact" className="btn-nav" onClick={closeMenu}>
                   Contact Us
                   <span aria-hidden="true">→</span>
-                </a>
+                </Link>
               </li>
             </ul>
 

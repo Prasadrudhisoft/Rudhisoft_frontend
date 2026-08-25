@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+.blog-page { font-family: var(--font-primary, 'Inter', sans-serif); color: var(--gray-700, #374151); }
+.blog-page .container { width: 90%; max-width: 1280px; margin: 0 auto; }
+.blog-page a { text-decoration: none; color: inherit; }
+
+/* HERO */
+.blog-hero { padding: 200px 0 70px; background: linear-gradient(180deg, var(--off-white, #f8fafc) 0%, var(--white, #fff) 100%); text-align: center; }
+.blog-hero .container { max-width: 760px; }
+.blog-hero h1 { font-family: var(--font-display, 'Space Grotesk', sans-serif); font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800; color: var(--gray-900, #111827); margin-bottom: 16px; }
+.blog-hero p { font-size: 1.1rem; color: var(--gray-500, #6b7280); line-height: 1.7; }
+
+/* CLUSTER FILTER */
+.blog-cluster-tabs { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; padding: 0 0 60px; }
+.blog-cluster-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  border: 1px solid var(--gray-200, #e5e7eb);
+  color: var(--gray-700, #374151);
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: var(--white, #fff);
+  transition: all 0.2s;
+}
+.blog-cluster-tab:hover, .blog-cluster-tab.active {
+  border-color: var(--primary, #2e3192);
+  color: var(--primary, #2e3192);
+  background: rgba(46, 49, 146, 0.06);
+}
+
+/* CLUSTER SECTIONS */
+.blog-cluster-section { padding: 0 0 70px; }
+.blog-cluster-header { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+.blog-cluster-header .icon { font-size: 1.6rem; }
+.blog-cluster-header h2 { font-family: var(--font-display, 'Space Grotesk', sans-serif); font-size: 1.5rem; font-weight: 700; color: var(--gray-900, #111827); }
+.blog-cluster-header .related-link { margin-left: auto; font-size: 0.85rem; font-weight: 600; color: var(--primary, #2e3192); }
+
+.blog-post-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.blog-post-card {
+  background: var(--white, #fff);
+  border: 1px solid var(--gray-200, #e5e7eb);
+  border-radius: 16px;
+  padding: 26px;
+  transition: all 0.25s;
+}
+.blog-post-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-color: transparent; }
+.blog-post-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray-900, #111827); margin-bottom: 10px; line-height: 1.4; }
+.blog-post-card p { font-size: 0.9rem; color: var(--gray-500, #6b7280); line-height: 1.6; margin-bottom: 16px; }
+.blog-post-card .read-more { font-size: 0.85rem; font-weight: 600; color: var(--primary, #2e3192); }
+
+/* SINGLE POST */
+.blog-post { padding: 140px 0 90px; }
+.blog-post .container { max-width: 760px; }
+.blog-post-breadcrumb { font-size: 0.85rem; color: var(--gray-400, #9ca3af); margin-bottom: 24px; }
+.blog-post-breadcrumb a { color: var(--primary, #2e3192); font-weight: 600; }
+.blog-post h1 { font-family: var(--font-display, 'Space Grotesk', sans-serif); font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; color: var(--gray-900, #111827); margin-bottom: 24px; line-height: 1.3; }
+.blog-post-body { font-size: 1.05rem; color: var(--gray-600, #4b5563); line-height: 1.8; padding: 24px 0 40px; border-top: 1px solid var(--gray-200, #e5e7eb); border-bottom: 1px solid var(--gray-200, #e5e7eb); margin-bottom: 40px; }
+.blog-post-cta { text-align: center; padding: 40px; background: var(--off-white, #f8fafc); border-radius: 20px; }
+.blog-post-cta p { color: var(--gray-500, #6b7280); margin-bottom: 20px; }
+.blog-post-cta .btn {
+  display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px;
+  border-radius: 9999px; font-weight: 600; background: var(--primary-gradient, linear-gradient(135deg,#2e3192,#1a1d5a));
+  color: #fff;
+}
+
+.blog-not-found { padding: 160px 0; text-align: center; }
+/* =========================
+   SCROLL REVEAL
+========================== */
+.ip-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ip-reveal.ip-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.ip-reveal-stagger .ip-reveal {
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ip-reveal { opacity: 1; transform: none; transition: none; }
+}

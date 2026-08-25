@@ -1,6 +1,9 @@
 // src/pages/AboutUs.jsx
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './about.css';
+import SEO, { organizationSchema, breadcrumbSchema } from '../Components/SEO';
+import { FaBalanceScale, FaBookOpen, FaBullseye, FaChartBar, FaChartLine, FaCheck, FaClipboardList, FaCloud, FaCompass, FaFistRaised, FaGem, FaGithub, FaGlassCheers, FaGlobeAsia, FaGraduationCap, FaHandshake, FaLaptopCode, FaLightbulb, FaLinkedin, FaMedal, FaPalette, FaRobot, FaRocket, FaSeedling, FaShieldAlt, FaSmile, FaStar, FaTrophy, FaTwitter, FaUnlockAlt, FaUserTie, FaUsers } from 'react-icons/fa';
 
 // Sub-components
 const SectionBadge = ({ icon, text }) => (
@@ -100,34 +103,34 @@ const AboutUs = () => {
 
   // Data Arrays
   const introStats = [
-    { number: '10+', label: 'Years of Excellence' },
-    { number: '200+', label: 'Projects Delivered' },
-    { number: '50+', label: 'Team Members' },
+    { number: '15+', label: 'Projects Delivered' },
+    { number: '98%', label: 'Client Satisfaction' },
+    { number: '10+', label: 'Tech Experts' },
   ];
 
   const missionPoints = [
-    'Deliver excellence in every project we undertake',
+    'Solve one real operational problem well, per product',
+    'Deploy fast — days, not months',
     'Build lasting partnerships based on trust and transparency',
-    'Continuously innovate to stay ahead of technology curves',
-    'Create measurable business value for our clients',
+    'Give every customer a clear path from problem to demo to go-live',
   ];
 
   const visionPoints = [
-    'Lead the AI and digital transformation revolution',
-    'Set industry standards for software quality and security',
-    'Build a global community of technology excellence',
-    'Shape the future of how businesses leverage technology',
+    'Become the default ready-made software for Indian schools, contractors, hospitals, and factories',
+    'Keep our products simple enough to deploy without a lengthy implementation project',
+    'Take on custom builds where off-the-shelf genuinely isn\'t enough',
+    'Earn trust through outcomes, not marketing claims',
   ];
 
   const values = [
-    { icon: '💡', title: 'Innovation First', description: 'We embrace new ideas and technologies to solve complex challenges creatively.' },
-    { icon: '🎯', title: 'Excellence Always', description: 'We never settle for "good enough." Every interaction reflects our commitment to quality.' },
-    { icon: '🤝', title: 'Client Partnership', description: "We see ourselves as an extension of our clients' teams, invested in their success." },
-    { icon: '🔓', title: 'Transparency', description: 'Open communication and honest feedback form the foundation of every relationship.' },
-    { icon: '📈', title: 'Continuous Growth', description: 'We invest in learning and constantly evolve to stay at the forefront of technology.' },
-    { icon: '🌱', title: 'Sustainability', description: 'We build solutions designed for the long term, considering environmental impact.' },
-    { icon: '🛡️', title: 'Integrity', description: "We do what's right, even when no one is watching. Ethics are non-negotiable." },
-    { icon: '👥', title: 'Collaboration', description: 'Great things happen when diverse minds work together. We celebrate teamwork.' },
+    { icon: <FaLightbulb />, title: 'Innovation First', description: 'We embrace new ideas and technologies to solve complex challenges creatively.' },
+    { icon: <FaBullseye />, title: 'Excellence Always', description: 'We never settle for "good enough." Every interaction reflects our commitment to quality.' },
+    { icon: <FaHandshake />, title: 'Client Partnership', description: "We see ourselves as an extension of our clients' teams, invested in their success." },
+    { icon: <FaUnlockAlt />, title: 'Transparency', description: 'Open communication and honest feedback form the foundation of every relationship.' },
+    { icon: <FaChartLine />, title: 'Continuous Growth', description: 'We invest in learning and constantly evolve to stay at the forefront of technology.' },
+    { icon: <FaSeedling />, title: 'Sustainability', description: 'We build solutions designed for the long term, considering environmental impact.' },
+    { icon: <FaShieldAlt />, title: 'Integrity', description: "We do what's right, even when no one is watching. Ethics are non-negotiable." },
+    { icon: <FaUsers />, title: 'Collaboration', description: 'Great things happen when diverse minds work together. We celebrate teamwork.' },
   ];
 
   const timeline = [
@@ -145,8 +148,8 @@ const AboutUs = () => {
     role: 'Founder & CEO',
     description: '20+ years of experience in technology leadership and business strategy.',
     socials: [
-      { icon: '💼', link: '#', label: 'LinkedIn' },
-      { icon: '🐦', link: '#', label: 'Twitter' },
+      { icon: <FaLinkedin />, link: '#', label: 'LinkedIn' },
+      { icon: <FaTwitter />, link: '#', label: 'Twitter' },
     ],
   },
   {
@@ -155,14 +158,14 @@ const AboutUs = () => {
     role: 'Co-Founder',
     description: 'AI/ML expert with 15+ years building scalable enterprise systems.',
     socials: [
-      { icon: '💼', link: '#', label: 'LinkedIn' },
-      { icon: '💻', link: '#', label: 'GitHub' },
+      { icon: <FaLinkedin />, link: '#', label: 'LinkedIn' },
+      { icon: <FaGithub />, link: '#', label: 'GitHub' },
     ],
   },
 ];
 
 const professionals = [
-  { image: '', name: 'Priya Patel', role: 'COO' },
+  { image: '', name: 'Priya Patel', role: 'CTO' },
   { image: '', name: 'Atul Sahane', role: 'FullStack Developer' },
   { image: '', name: 'Arjun Sharma', role: 'Lead Developer' },
   { image: '', name: 'Anshika', role: 'UI/UX Designer' },
@@ -175,26 +178,26 @@ const professionals = [
 
 
   const extendedTeam = [
-    { icon: '👨‍💻', title: 'Engineering', count: '25+ Developers' },
-    { icon: '🎨', title: 'Design', count: '8+ Designers' },
-    { icon: '☁️', title: 'DevOps', count: '6+ Engineers' },
-    { icon: '🤖', title: 'AI/ML', count: '5+ Specialists' },
-    { icon: '📊', title: 'Analytics', count: '4+ Analysts' },
-    { icon: '🛡️', title: 'QA', count: '6+ Testers' },
+    { icon: <FaLaptopCode />, title: 'Engineering', count: '25+ Developers' },
+    { icon: <FaPalette />, title: 'Design', count: '8+ Designers' },
+    { icon: <FaCloud />, title: 'DevOps', count: '6+ Engineers' },
+    { icon: <FaRobot />, title: 'AI/ML', count: '5+ Specialists' },
+    { icon: <FaChartBar />, title: 'Analytics', count: '4+ Analysts' },
+    { icon: <FaShieldAlt />, title: 'QA', count: '6+ Testers' },
   ];
 
   const achievements = [
-    { icon: '🏆', number: '10+', label: 'Projects Completed' },
-    { icon: '😊', number: '98%', label: 'Client Satisfaction' },
-    { icon: '🌍', number: '15+', label: 'Countries Served' },
-    { icon: '🏅', number: '12+', label: 'Industry Awards' },
+    { icon: <FaTrophy />, number: '10+', label: 'Projects Completed' },
+    { icon: <FaSmile />, number: '98%', label: 'Client Satisfaction' },
+    { icon: <FaGlobeAsia />, number: '15+', label: 'Countries Served' },
+    { icon: <FaMedal />, number: '12+', label: 'Industry Awards' },
   ];
 
   const cultureFeatures = [
-    { icon: '🎓', title: 'Continuous Learning', description: 'Access to courses, certifications, conferences, and learning resources.' },
-    { icon: '⚖️', title: 'Work-Life Balance', description: 'Flexible hours, remote work options, and generous time off policies.' },
-    { icon: '🎉', title: 'Fun & Celebrations', description: 'Team events, hackathons, game nights, and celebration of milestones.' },
-    { icon: '💪', title: 'Health & Wellness', description: 'Comprehensive health benefits, gym memberships, and mental health support.' },
+    { icon: <FaGraduationCap />, title: 'Continuous Learning', description: 'Access to courses, certifications, conferences, and learning resources.' },
+    { icon: <FaBalanceScale />, title: 'Work-Life Balance', description: 'Flexible hours, remote work options, and generous time off policies.' },
+    { icon: <FaGlassCheers />, title: 'Fun & Celebrations', description: 'Team events, hackathons, game nights, and celebration of milestones.' },
+    { icon: <FaFistRaised />, title: 'Health & Wellness', description: 'Comprehensive health benefits, gym memberships, and mental health support.' },
   ];
 
   const cultureImages = [
@@ -245,6 +248,14 @@ const professionals = [
   return (
     <div className="about-page" style={{ paddingTop: '92px' }}>
 
+      <SEO
+        title="About Us"
+        description="RUDHISOFT is a Nashik-based technology company building ready-made software for schools, construction sites, hospitals, and industrial security — plus custom software builds."
+        path="/about"
+        keywords="about RUDHISOFT, software company Nashik, technology team India"
+        jsonLd={[organizationSchema, breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'About Us', path: '/about' }])]}
+      />
+
       {/* Company Intro Section */}
       <section className="company-intro">
         <div className="container">
@@ -252,20 +263,22 @@ const professionals = [
             <div className="intro-content reveal-left">
               <span className="intro-label">Who We Are</span>
               <h1 className="intro-title">
-                Building the <span>Future</span> of Technology, One Innovation at a Time
+                Ready-Made Software for <span>Real Industries</span>, Built by a Team That Ships
               </h1>
               <p className="intro-text">
-                Founded with a vision to bridge the gap between business challenges and technological solutions,
-                RUDHISOFT has grown from a small team of developers into a full-service technology partner
-                trusted by companies across the globe.
+                RUDHISOFT is a Nashik-based technology company building ready-made software for
+                schools, construction sites, hospitals, and industrial security — RudhiCore,
+                RudhiArch, our Hospital Management System, and Industry Security System — plus
+                custom software for businesses that need something off-the-shelf can't cover.
               </p>
               <p className="intro-text highlight">
-                "We don't just build software. We engineer solutions that transform how businesses operate,
-                compete, and grow in the digital age."
+                "We don't build vague 'innovative solutions.' We solve specific problems —
+                admissions chaos, site visibility, patient queues, gate security — with software
+                that ships in days, not months."
               </p>
               <p className="intro-text">
-                Our journey began with a simple belief: that technology should empower businesses, not complicate them.
-                Today, we continue to uphold this principle through every project we undertake.
+                Every product we build starts from a real operational pain point, not a feature
+                checklist. That's why our customers go live fast and keep using what we build.
               </p>
 
               <div className="intro-stats">
@@ -290,10 +303,10 @@ const professionals = [
               </div>
 
               <div className="intro-float-card">
-                <div className="intro-float-icon">🌍</div>
+                <div className="intro-float-icon">🇮🇳</div>
                 <div className="intro-float-content">
-                  <h4>Global Presence</h4>
-                  <p>Serving 15+ Countries</p>
+                  <h4>Nashik, India</h4>
+                  <p>Built for Indian Businesses</p>
                 </div>
               </div>
 
@@ -310,7 +323,7 @@ const professionals = [
       <section className="mission-vision">
         <div className="container">
           <div className="mv-header reveal">
-            <SectionBadge icon="🎯" text="Our Purpose" />
+            <SectionBadge icon=<FaBullseye /> text="Our Purpose" />
             <h2 className="section-title">Mission & <span>Vision</span></h2>
             <p className="section-subtitle">
               Guided by purpose, driven by innovation — discover the principles that shape
@@ -320,29 +333,31 @@ const professionals = [
 
           <div className="mv-grid stagger-children">
             <div className="mv-card mission-card">
-              <div className="mv-icon">🚀</div>
+              <div className="mv-icon"><FaRocket /></div>
               <h3>Our Mission</h3>
               <p>
-                To empower organizations worldwide with innovative, scalable, and intelligent
-                technology solutions that drive growth, efficiency, and competitive advantage.
+                To give schools, contractors, hospitals, and factories software that solves their
+                actual day-to-day problems — admissions, site visibility, patient queues, gate
+                security — and to build custom software for companies whose needs go beyond that.
               </p>
               <ul className="mv-points">
                 {missionPoints.map((point, index) => (
-                  <li key={index}><span>✓</span> {point}</li>
+                  <li key={index}><span><FaCheck /></span> {point}</li>
                 ))}
               </ul>
             </div>
 
             <div className="mv-card vision-card">
-              <div className="mv-icon">🔮</div>
+              <div className="mv-icon"><FaCompass /></div>
               <h3>Our Vision</h3>
               <p>
-                To be the world's most trusted technology partner, recognized for our innovation,
-                expertise, and unwavering commitment to client success in the AI-driven future.
+                To be the go-to ready-made software provider for Indian schools, construction
+                sites, hospitals, and factories — known for fast deployment and software that
+                actually gets used, not just installed.
               </p>
               <ul className="mv-points">
                 {visionPoints.map((point, index) => (
-                  <li key={index}><span>✓</span> {point}</li>
+                  <li key={index}><span><FaCheck /></span> {point}</li>
                 ))}
               </ul>
             </div>
@@ -354,7 +369,7 @@ const professionals = [
       <section className="core-values">
         <div className="container">
           <div className="values-header reveal">
-            <SectionBadge icon="💎" text="What We Stand For" />
+            <SectionBadge icon=<FaGem /> text="What We Stand For" />
             <h2 className="section-title">Our Core <span>Values</span></h2>
             <p className="section-subtitle">
               These principles guide our decisions, shape our culture, and define
@@ -374,7 +389,7 @@ const professionals = [
       <section className="our-story">
         <div className="container">
           <div className="story-header reveal">
-            <SectionBadge icon="📖" text="Our Journey" />
+            <SectionBadge icon=<FaBookOpen /> text="Our Journey" />
             <h2 className="section-title">The RUDHISOFT <span>Story</span></h2>
             <p className="section-subtitle">
               From humble beginnings to a global technology partner — explore
@@ -394,7 +409,7 @@ const professionals = [
 <section className="leadership">
   <div className="container">
     <div className="leadership-header reveal">
-      <SectionBadge icon="👥" text="Meet Our Leaders" />
+      <SectionBadge icon=<FaUsers /> text="Meet Our Leaders" />
       <h2 className="section-title">Leadership <span>Team</span></h2>
       <p className="section-subtitle">
         The visionaries driving RUDHISOFT forward — meet the experienced
@@ -457,7 +472,7 @@ const professionals = [
         <div className="container">
           <div className="culture-grid">
             <div className="culture-content reveal-left">
-              <SectionBadge icon="🌟" text="Life at RUDHISOFT" />
+              <SectionBadge icon=<FaStar /> text="Life at RUDHISOFT" />
               <h2 className="section-title">Our <span>Culture</span></h2>
               <p className="culture-text">
                 At RUDHISOFT, we believe that great work comes from great people working in
@@ -491,7 +506,7 @@ const professionals = [
       <section className="why-work-with-us">
         <div className="container">
           <div className="why-work-header reveal">
-            <SectionBadge icon="🤝" text="Partner With Us" />
+            <SectionBadge icon=<FaHandshake /> text="Partner With Us" />
             <h2 className="section-title">Why Work With <span>RUDHISOFT?</span></h2>
             <p className="section-subtitle">
               Discover what makes us different and why leading companies
@@ -511,20 +526,20 @@ const professionals = [
       <section className="cta">
         <div className="container">
           <div className="cta-content reveal">
-            <h2 className="cta-title">Ready to Start Your Journey With Us?</h2>
+            <h2 className="cta-title">Ready to See Which Product Fits You?</h2>
             <p className="cta-text">
-              Let's discuss how RUDHISOFT can help transform your business with
-              innovative technology solutions. Schedule a free consultation today.
+              Whether it's RudhiCore, RudhiArch, our Hospital Management System, Industry
+              Security System, or a custom build — let's talk. Get a free 20-min consultation.
             </p>
             <div className="cta-buttons">
-              <a href="/contact" className="btn btn-primary">
+              <Link to="/contact" className="btn btn-primary">
                 <span>Get in Touch</span>
                 <span className="btn-icon">→</span>
-              </a>
-              <a href="/services" className="btn btn-secondary">
+              </Link>
+              <Link to="/services" className="btn btn-secondary">
                 <span>Explore Services</span>
-                <span className="btn-icon">📋</span>
-              </a>
+                <span className="btn-icon"><FaClipboardList /></span>
+              </Link>
             </div>
           </div>
         </div>

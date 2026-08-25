@@ -1,89 +1,101 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import teamCultureImg from '../assets/images/team-culture.jpg';
 import './technology.css';
+import {
+  SiReact, SiVuedotjs, SiAngular, SiNextdotjs, SiTypescript, SiTailwindcss, SiFlutter,
+  SiNodedotjs, SiPython, SiOpenjdk, SiDotnet, SiDjango, SiFastapi, SiSpringboot, SiExpress,
+  SiGooglecloud, SiDocker, SiKubernetes, SiTerraform, SiJenkins, SiGitlab,
+  SiPostgresql, SiMysql, SiMongodb, SiRedis, SiElasticsearch, SiFirebase,
+  SiTensorflow, SiPytorch, SiScikitlearn, SiHuggingface, SiOpencv,
+} from 'react-icons/si';
+import { FaAws, FaMicrosoft, FaPalette, FaCogs, FaCloud, FaDatabase, FaRobot,
+  FaBolt, FaChartLine, FaShieldAlt, FaWrench, FaRocket, FaHandshake,
+  FaLaptopCode, FaStar, FaBullseye } from 'react-icons/fa';
 
 // ── Data ────────────────────────────────────────────────────────────────────
 
 const techCategories = [
   {
-    icon: '🎨',
+    icon: <FaPalette />,
     title: 'Frontend Development',
     desc: 'Building beautiful, responsive user interfaces',
     items: [
-      { icon: '⚛️', label: 'React' },
-      { icon: '💚', label: 'Vue.js' },
-      { icon: '🅰️', label: 'Angular' },
-      { icon: '▲', label: 'Next.js' },
-      { icon: '🟦', label: 'TypeScript' },
-      { icon: '🌊', label: 'Tailwind' },
-      { icon: '📱', label: 'React Native' },
-      { icon: '🦋', label: 'Flutter' },
+      { icon: <SiReact />, label: 'React' },
+      { icon: <SiVuedotjs />, label: 'Vue.js' },
+      { icon: <SiAngular />, label: 'Angular' },
+      { icon: <SiNextdotjs />, label: 'Next.js' },
+      { icon: <SiTypescript />, label: 'TypeScript' },
+      { icon: <SiTailwindcss />, label: 'Tailwind' },
+      { icon: <SiReact />, label: 'React Native' },
+      { icon: <SiFlutter />, label: 'Flutter' },
     ],
   },
   {
-    icon: '⚙️',
+    icon: <FaCogs />,
     title: 'Backend Development',
     desc: 'Robust, scalable server-side solutions',
     items: [
-      { icon: '🟢', label: 'Node.js' },
-      { icon: '🐍', label: 'Python' },
-      { icon: '☕', label: 'Java' },
-      { icon: '🔷', label: '.NET Core' },
-      { icon: '🚀', label: 'Django' },
-      { icon: '⚡', label: 'FastAPI' },
-      { icon: '🍃', label: 'Spring Boot' },
-      { icon: '🔺', label: 'Express.js' },
+      { icon: <SiNodedotjs />, label: 'Node.js' },
+      { icon: <SiPython />, label: 'Python' },
+      { icon: <SiOpenjdk />, label: 'Java' },
+      { icon: <SiDotnet />, label: '.NET Core' },
+      { icon: <SiDjango />, label: 'Django' },
+      { icon: <SiFastapi />, label: 'FastAPI' },
+      { icon: <SiSpringboot />, label: 'Spring Boot' },
+      { icon: <SiExpress />, label: 'Express.js' },
     ],
   },
   {
-    icon: '☁️',
+    icon: <FaCloud />,
     title: 'Cloud & DevOps',
     desc: 'Scalable infrastructure and automation',
     items: [
-      { icon: '🟠', label: 'AWS' },
-      { icon: '🔵', label: 'Azure' },
-      { icon: '🌈', label: 'Google Cloud' },
-      { icon: '🐳', label: 'Docker' },
-      { icon: '☸️', label: 'Kubernetes' },
-      { icon: '🏗️', label: 'Terraform' },
-      { icon: '🔄', label: 'Jenkins' },
-      { icon: '🦊', label: 'GitLab CI' },
+      { icon: <FaAws />, label: 'AWS' },
+      { icon: <FaMicrosoft />, label: 'Azure' },
+      { icon: <SiGooglecloud />, label: 'Google Cloud' },
+      { icon: <SiDocker />, label: 'Docker' },
+      { icon: <SiKubernetes />, label: 'Kubernetes' },
+      { icon: <SiTerraform />, label: 'Terraform' },
+      { icon: <SiJenkins />, label: 'Jenkins' },
+      { icon: <SiGitlab />, label: 'GitLab CI' },
     ],
   },
   {
-    icon: '🗄️',
+    icon: <FaDatabase />,
     title: 'Databases',
     desc: 'Reliable data storage and management',
     items: [
-      { icon: '🐘', label: 'PostgreSQL' },
-      { icon: '🐬', label: 'MySQL' },
-      { icon: '🍃', label: 'MongoDB' },
-      { icon: '🔴', label: 'Redis' },
-      { icon: '🔍', label: 'Elasticsearch' },
-      { icon: '🔥', label: 'Firebase' },
+      { icon: <SiPostgresql />, label: 'PostgreSQL' },
+      { icon: <SiMysql />, label: 'MySQL' },
+      { icon: <SiMongodb />, label: 'MongoDB' },
+      { icon: <SiRedis />, label: 'Redis' },
+      { icon: <SiElasticsearch />, label: 'Elasticsearch' },
+      { icon: <SiFirebase />, label: 'Firebase' },
     ],
   },
   {
-    icon: '🤖',
+    icon: <FaRobot />,
     title: 'AI & Machine Learning',
     desc: 'Intelligent solutions and automation',
     items: [
-      { icon: '🧠', label: 'TensorFlow' },
-      { icon: '🔥', label: 'PyTorch' },
-      { icon: '📊', label: 'Scikit-learn' },
-      { icon: '🤗', label: 'Hugging Face' },
-      { icon: '💬', label: 'OpenAI' },
-      { icon: '👁️', label: 'OpenCV' },
+      { icon: <SiTensorflow />, label: 'TensorFlow' },
+      { icon: <SiPytorch />, label: 'PyTorch' },
+      { icon: <SiScikitlearn />, label: 'Scikit-learn' },
+      { icon: <SiHuggingface />, label: 'Hugging Face' },
+      { icon: <FaRobot />, label: 'OpenAI' },
+      { icon: <SiOpencv />, label: 'OpenCV' },
     ],
   },
 ];
 
 const whyCards = [
-  { icon: '⚡', title: 'Performance', text: 'Optimized for speed and efficiency, ensuring your applications run smoothly at scale.' },
-  { icon: '📈', title: 'Scalability', text: 'Built to grow with your business, from startup to enterprise-level demands.' },
-  { icon: '🛡️', title: 'Security', text: 'Industry-standard security practices and tools to protect your data.' },
-  { icon: '🔧', title: 'Maintainability', text: "Clean, well-documented code that's easy to maintain and extend." },
-  { icon: '🚀', title: 'Modern Standards', text: 'Following best practices and latest industry standards.' },
-  { icon: '🤝', title: 'Community Support', text: 'Technologies backed by strong communities and regular updates.' },
+  { icon: <FaBolt />, title: 'Performance', text: 'Optimized for speed and efficiency, ensuring your applications run smoothly at scale.' },
+  { icon: <FaChartLine />, title: 'Scalability', text: 'Built to grow with your business, from startup to enterprise-level demands.' },
+  { icon: <FaShieldAlt />, title: 'Security', text: 'Industry-standard security practices and tools to protect your data.' },
+  { icon: <FaWrench />, title: 'Maintainability', text: "Clean, well-documented code that's easy to maintain and extend." },
+  { icon: <FaRocket />, title: 'Modern Standards', text: 'Following best practices and latest industry standards.' },
+  { icon: <FaHandshake />, title: 'Community Support', text: 'Technologies backed by strong communities and regular updates.' },
 ];
 
 const partners = ['AWS Partner', 'Google Cloud', 'Microsoft Azure', 'MongoDB', 'Docker'];
@@ -114,7 +126,7 @@ function TechStack() {
     <section className="tech-stack">
       <div className="container">
         <div className="tech-header reveal">
-          <span className="section-badge"><span>💻</span> Technologies We Use</span>
+          <span className="section-badge"><span><FaLaptopCode /></span> Technologies We Use</span>
           <h2 className="section-title">Our Tech <span>Stack</span></h2>
           <p className="section-subtitle">
             Modern, proven technologies that power our solutions across all domains.
@@ -173,7 +185,7 @@ function WhyStack() {
     <section className="why-stack">
       <div className="container">
         <div className="why-stack-header reveal">
-          <span className="section-badge"><span>✨</span> Why It Matters</span>
+          <span className="section-badge"><span><FaStar /></span> Why It Matters</span>
           <h2 className="section-title">Why Our <span>Tech Stack</span></h2>
           <p className="section-subtitle">
             We carefully select technologies that deliver the best results for your project.
@@ -206,7 +218,7 @@ function Expertise() {
       <div className="container">
         <div className="expertise-grid">
           <div className="expertise-content reveal-left">
-            <span className="section-badge"><span>🎯</span> Our Expertise</span>
+            <span className="section-badge"><span><FaBullseye /></span> Our Expertise</span>
             <h2>Deep Technical <span>Knowledge</span></h2>
             <p>
               Our team consists of certified experts with years of experience
@@ -230,7 +242,7 @@ function Expertise() {
           <div className="expertise-visual reveal-right">
             <div className="expertise-image">
               <img
-                src="/static/images/tech-team.jpg"
+                src={teamCultureImg}
                 alt="Tech Team"
                 onError={e => {
                   e.target.src = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=450&fit=crop';
@@ -253,7 +265,7 @@ function Partners() {
     <section className="partners">
       <div className="container">
         <div className="partners-header reveal">
-          <span className="section-badge"><span>🤝</span> Partnerships</span>
+          <span className="section-badge"><span><FaHandshake /></span> Partnerships</span>
           <h2 className="section-title">Technology <span>Partners</span></h2>
         </div>
         <div className="partners-logos stagger-children">
@@ -276,8 +288,8 @@ function CTA() {
             Ready to leverage our technology expertise for your next project?
           </p>
           <div className="cta-buttons">
-            <a href="/contact" className="btn btn-primary">Start a Project →</a>
-            <a href="/services" className="btn btn-secondary">View Services</a>
+            <Link to="/contact" className="btn btn-primary">Start a Project →</Link>
+            <Link to="/services" className="btn btn-secondary">View Services</Link>
           </div>
         </div>
       </div>

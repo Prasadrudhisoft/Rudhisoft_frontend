@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './contact.css';
+import { FaCheckCircle, FaCommentDots, FaEnvelope, FaExclamationTriangle, FaHeadset, FaMapMarkerAlt, FaPhoneAlt, FaQuestionCircle, FaTwitter, FaLinkedin, FaGithub, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 // ── Config ────────────────────────────────────────────────────────────────────
 const API_URL = 'https://admin.rudhisoft.com';
@@ -38,10 +40,10 @@ function buildMessage({ company, service, budget, phone, message }) {
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const contactCards = [
-  { icon: '📧', title: 'Email Us', sub: 'For general inquiries', link: 'mailto:info@rudhisoft.com', linkLabel: 'info@rudhisoft.com' },
-  { icon: '📞', title: 'Call Us', sub: 'Mon-Fri, 9am-6pm IST', link: 'tel:+911234567890', linkLabel: '+91 123 456 7890' },
-  { icon: '📍', title: 'Visit Us', sub: 'Our Office Location', text: 'Nashik, Maharashtra, India' },
-  { icon: '🎯', title: 'Support', sub: 'For existing clients', link: 'mailto:support@rudhisoft.com', linkLabel: 'support@rudhisoft.com' },
+  { icon: <FaEnvelope />, title: 'Email Us', sub: 'For general inquiries', link: 'mailto:director@rudhisoft.com', linkLabel: 'director@rudhisoft.com' },
+  { icon: <FaPhoneAlt />, title: 'Call Us', sub: 'Mon-Fri, 9am-6pm IST', link: 'tel:+919766149500', linkLabel: '+91 97661 49500' },
+  { icon: <FaMapMarkerAlt />, title: 'Visit Us', sub: 'Our Office Location', text: '13, Maruti Plaza, Vidya Vikas Circle, Gangapur Rd, Nashik, Maharashtra 422005' },
+  { icon: <FaHeadset />, title: 'Support', sub: 'For existing clients', link: 'mailto:director@rudhisoft.com', linkLabel: 'director@rudhisoft.com' },
 ];
 
 const faqData = [
@@ -160,7 +162,7 @@ function ContactForm() {
 
       {error && (
         <div className="form-error show">
-          <span>⚠️</span> {error}
+          <span><FaExclamationTriangle /></span> {error}
         </div>
       )}
 
@@ -221,7 +223,7 @@ function ContactForm() {
           <div className="form-checkbox">
             <input type="checkbox" id="privacy" name="privacy" checked={form.privacy} onChange={handleChange} required />
             <label htmlFor="privacy">
-              I agree to the <a href="#">Privacy Policy</a> and consent to being contacted regarding my inquiry.
+              I agree to the <Link to="/privacy">Privacy Policy</Link> and consent to being contacted regarding my inquiry.
             </label>
           </div>
 
@@ -233,7 +235,7 @@ function ContactForm() {
 
       {success && (
         <div className="form-success show">
-          <div className="form-success-icon">✅</div>
+          <div className="form-success-icon"><FaCheckCircle /></div>
           <h3>Message Sent Successfully!</h3>
           <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
           <button type="button" className="btn-submit" onClick={handleReset}>
@@ -253,7 +255,7 @@ function ContactSection() {
         <div className="contact-grid">
           <div className="contact-info reveal-left">
             <div className="contact-info-header">
-              <span className="section-badge"><span>💬</span> Let's Talk</span>
+              <span className="section-badge"><span><FaCommentDots /></span> Let's Talk</span>
               <h2>We're Here to <span>Help</span></h2>
               <p>Reach out to us through any of these channels. We typically respond within 24 hours.</p>
             </div>
@@ -277,7 +279,7 @@ function ContactSection() {
             <div className="contact-social">
               <h4>Follow Us</h4>
               <div className="social-links">
-                {[['💼', 'LinkedIn'], ['🐦', 'Twitter'], ['💻', 'GitHub'], ['📷', 'Instagram'], ['🎬', 'YouTube']].map(([icon, name]) => (
+                {[[<FaLinkedin />, 'LinkedIn'], [<FaTwitter />, 'Twitter'], [<FaGithub />, 'GitHub'], [<FaInstagram />, 'Instagram'], [<FaYoutube />, 'YouTube']].map(([icon, name]) => (
                   <a key={name} href="#" className="social-link" aria-label={name}>{icon}</a>
                 ))}
               </div>
@@ -301,7 +303,7 @@ function FAQSection() {
     <section className="faq-section">
       <div className="container">
         <div className="faq-header reveal">
-          <span className="section-badge"><span>❓</span> FAQs</span>
+          <span className="section-badge"><span><FaQuestionCircle /></span> FAQs</span>
           <h2>Frequently Asked <span>Questions</span></h2>
           <p>Quick answers to common questions about working with us.</p>
         </div>
@@ -338,8 +340,8 @@ function CTA() {
           <h2 className="cta-title">Ready to Start Your Project?</h2>
           <p className="cta-text">Let's turn your ideas into reality. Get a free consultation and quote.</p>
           <div className="cta-buttons">
-            <a href="tel:+911234567890" className="btn btn-primary">Call Us Now 📞</a>
-            <a href="/services" className="btn btn-secondary">View Services</a>
+            <a href="tel:+919766149500" className="btn btn-primary">Call Us Now <FaPhoneAlt /></a>
+            <Link to="/services" className="btn btn-secondary">View Services</Link>
           </div>
         </div>
       </div>

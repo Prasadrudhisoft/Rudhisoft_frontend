@@ -458,7 +458,7 @@ button {
 .rs-hero-title {
   font-family: var(--font-display);
   font-size: clamp(2rem, 6vw, 4.5rem);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   line-height: 1.1;
   margin-bottom: 24px;
@@ -1128,6 +1128,75 @@ button {
 
 .rs-service-card:hover .rs-service-link {
   gap: 12px;
+}
+
+/* =========================
+   PRODUCT CARD CTA ROW (product-led homepage)
+========================== */
+.rs-product-ctas {
+  display: flex;
+  gap: 14px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.rs-product-ctas a {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.rs-product-ctas a.rs-link-primary {
+  color: var(--primary);
+}
+
+.rs-product-ctas a.rs-link-secondary {
+  color: var(--gray-500);
+}
+
+.rs-product-ctas a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   CUSTOM SOFTWARE SECTION
+========================== */
+.rs-custom-software {
+  padding: 90px 0;
+  background: var(--gray-50, #f8f9fc);
+}
+
+.rs-custom-software-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.rs-custom-software-inner ul {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 32px;
+}
+
+.rs-custom-software-inner ul li {
+  font-size: 1.05rem;
+  color: var(--gray-500);
+  line-height: 1.7;
+}
+
+/* =========================
+   FOOTER CTA BAND
+========================== */
+.rs-footer-cta-band {
+  padding: 40px 0;
+  background: var(--primary-gradient);
+  text-align: center;
+}
+
+.rs-footer-cta-band p {
+  color: var(--white);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 16px;
 }
 
 /* =========================

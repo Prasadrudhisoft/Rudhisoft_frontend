@@ -193,7 +193,10 @@ nav { display: flex; align-items: center; }
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: url("/static/images/careers-bg.jpg") center / cover no-repeat;
+  /* ⚠️ careers-bg.jpg was referenced but never supplied — using a brand gradient
+     until a real photo is added. Drop the image at src/assets/images/careers-bg.jpg
+     and swap the line below for: background: url("../assets/images/careers-bg.jpg") center / cover no-repeat; */
+  background: linear-gradient(135deg, #2e3192 0%, #1a1d5a 100%);
   color: white;
 }
 .page-hero::before {

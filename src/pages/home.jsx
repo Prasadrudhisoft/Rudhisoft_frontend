@@ -1,54 +1,47 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './home.css';
 import heroBg from '../assets/images/hero-bg.jpg';
 import about from '../assets/images/about-us.jpg';
-import techBgVideo from '../assets/videos/Tech-bg.mp4';
+import SEO, { organizationSchema } from '../Components/SEO';
+import { FaBolt, FaBullseye, FaCalendarAlt, FaCommentDots, FaGraduationCap, FaHandshake, FaHardHat, FaHospital, FaLightbulb, FaLock, FaRocket, FaTools, FaTrophy } from 'react-icons/fa';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
-const services = [
-  { icon: "💻", title: "Custom Software Development", desc: "Tailored software solutions built from the ground up to address your unique business challenges and drive operational excellence." },
-  { icon: "📱", title: "Web & Mobile Apps", desc: "High-performance, intuitive applications that deliver exceptional user experiences across all devices and platforms." },
-  { icon: "☁️", title: "Cloud & DevOps", desc: "Scalable cloud infrastructure and automated DevOps pipelines that ensure reliability, security, and faster time-to-market." },
-  { icon: "🤖", title: "AI & Machine Learning", desc: "Intelligent automation and data-driven insights that unlock new possibilities and transform decision-making processes." },
-];
-
-const whyCards = [
-  { icon: "🎯", title: "Business-First Approach", desc: "Every solution we build starts with understanding your business objectives and ends with measurable outcomes." },
-  { icon: "🔧", title: "Technical Excellence", desc: "Our team leverages modern architectures, clean code practices, and industry best standards for lasting quality." },
-  { icon: "🧠", title: "AI-Powered Innovation", desc: "We integrate artificial intelligence and automation to give your business a sustainable competitive edge." },
-  { icon: "⚡", title: "Agile Methodology", desc: "Flexible, iterative development ensures faster delivery, continuous feedback, and adaptive improvement." },
-  { icon: "🔒", title: "Security by Design", desc: "Enterprise-grade security practices embedded from day one to protect your data and maintain compliance." },
-  { icon: "🤝", title: "Dedicated Partnership", desc: "We're invested in your long-term success with ongoing support, maintenance, and strategic guidance." },
-];
-
-const processSteps = [
-  { num: "01", title: "Discovery & Strategy", desc: "Deep dive into your business goals, challenges, and requirements to define a clear roadmap and success metrics." },
-  { num: "02", title: "Design & Architecture", desc: "Create intuitive user experiences and robust system architectures that scale with your business growth." },
-  { num: "03", title: "Development & Testing", desc: "Agile sprints with continuous integration, automated testing, and regular demos to ensure quality delivery." },
-  { num: "04", title: "Launch & Support", desc: "Seamless deployment with monitoring, maintenance, and continuous optimization for peak performance." },
-];
-
-const techCards = [
-  { icon: "🎨", title: "Frontend Engineering", desc: "Crafting responsive, accessible, and performant user interfaces that delight users across all devices.", list: ["React, Vue.js, Angular", "Next.js, Nuxt.js", "TypeScript, Tailwind CSS", "Progressive Web Apps"] },
-  { icon: "⚙️", title: "Backend Systems", desc: "Building robust, scalable server-side architectures designed for high performance and reliability.", list: ["Node.js, Python, Java", "Django, FastAPI, Spring Boot", "GraphQL, REST APIs", "Microservices Architecture"] },
-  { icon: "☁️", title: "Cloud & Infrastructure", desc: "Deploying scalable, secure cloud solutions with automated DevOps pipelines.", list: ["AWS, Azure, Google Cloud", "Docker, Kubernetes", "Terraform, Ansible", "CI/CD Automation"] },
-  { icon: "🗄️", title: "Data & Analytics", desc: "Designing data architectures that power insights and intelligent decision-making.", list: ["PostgreSQL, MySQL, MongoDB", "Redis, Elasticsearch", "Data Warehousing", "Real-time Analytics"] },
-  { icon: "🤖", title: "AI & Machine Learning", desc: "Implementing intelligent systems that automate, predict, and transform business operations.", list: ["TensorFlow, PyTorch", "Natural Language Processing", "Computer Vision", "Predictive Analytics", "LLM Integration"] },
+const products = [
+  {
+    icon: <FaGraduationCap />,
+    name: "RudhiCore",
+    tag: "School / College Management",
+    desc: "All-in-one school & college management software — admissions, attendance, fees, exams, transport, hostel, reports on one platform.",
+    url: "/products/rudhicore-school-college-management",
+  },
+  {
+    icon: <FaHardHat />,
+    name: "RudhiArch",
+    tag: "Construction Site ERP",
+    desc: "Construction project & site management ERP for contractors — track sites, materials, labour, billing, and compliance from one dashboard.",
+    url: "/products/rudhiarch-construction-site-erp",
+  },
+  {
+    icon: <FaHospital />,
+    name: "Hospital Management System",
+    tag: "Clinics & Multi-Speciality Hospitals",
+    desc: "Hospital management software for clinics, nursing homes, and multi-speciality hospitals — OPD, IPD, EMR, billing, pharmacy, and reports.",
+    url: "/products/hospital-management-system",
+  },
+  {
+    icon: <FaLock />,
+    name: "Industry Security System",
+    tag: "Industrial Gate In-Out System",
+    desc: "Industrial security & access management for factories and warehouses — digital visitor & vehicle management with a full audit trail.",
+    url: "/products/industry-security-system",
+  },
 ];
 
 const testimonials = [
-  { initials: "RM", name: "Rahul Mehta", role: "CTO, FinTech Innovations", text: "RUDHISOFT delivered a scalable platform that exceeded our expectations. Their AI-driven approach helped us automate critical processes and reduce operational costs by 40%." },
-  { initials: "AS", name: "Ananya Sharma", role: "Product Director, SaaS Platform", text: "The team's technical expertise and attention to detail are exceptional. From UI/UX to backend architecture, everything was executed with precision and professionalism." },
-  { initials: "MJ", name: "Michael Johnson", role: "VP Operations, Enterprise Corp", text: "RUDHISOFT modernized our legacy systems using cloud and AI technologies. The performance improvements were remarkable — 3x faster processing and 99.9% uptime." },
-];
-
-const industries = [
-  { icon: "🏥", title: "Healthcare", desc: "AI diagnostics, telemedicine, patient management" },
-  { icon: "💰", title: "Finance", desc: "FinTech solutions, blockchain, risk analytics" },
-  { icon: "🛒", title: "E-Commerce", desc: "Scalable platforms, recommendation engines" },
-  { icon: "🏭", title: "Manufacturing", desc: "IoT integration, predictive maintenance" },
-  { icon: "🚗", title: "Automotive", desc: "Connected vehicles, smart systems" },
-  { icon: "📚", title: "Education", desc: "LMS platforms, AI tutoring systems" },
+  { initials: "RC", name: "School Administrator", role: "RudhiCore Customer", text: "We cut admission paperwork time by 60% after moving to RudhiCore — fee collection and reporting finally happen on one platform." },
+  { initials: "RA", name: "Site Manager", role: "RudhiArch Customer", text: "RudhiArch gave us real-time visibility across sites and cut our billing cycle from 10 days to 2 days." },
+  { initials: "HM", name: "Hospital Administrator", role: "Hospital MS Customer", text: "Digital OPD and integrated billing reduced patient waiting time and cut billing errors significantly." },
 ];
 
 // ─── Hooks ───────────────────────────────────────────────────────────────────
@@ -70,9 +63,7 @@ function useScrollReveal() {
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function HomePage() {
   const [backVisible, setBackVisible] = useState(false);
-  const [heroTitleText, setHeroTitleText] = useState("");
   const heroRef = useRef(null);
-  const fullTitle = "Intelligent Technology";
 
   useScrollReveal();
 
@@ -84,19 +75,6 @@ export default function HomePage() {
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Typing effect
-  useEffect(() => {
-    let i = 0;
-    const timer = setTimeout(function type() {
-      if (i <= fullTitle.length) {
-        setHeroTitleText(fullTitle.slice(0, i));
-        i++;
-        setTimeout(type, 50);
-      }
-    }, 2200);
-    return () => clearTimeout(timer);
   }, []);
 
   // Parallax shapes on mouse
@@ -137,6 +115,14 @@ export default function HomePage() {
   return (
     <div className="rs-body">
 
+      <SEO
+        title="School, Construction, Hospital & Industrial Security Software"
+        description="Ready-made software for schools, construction sites, hospitals, and industrial security — plus custom builds. Deploy in days, not months. Built for Indian businesses."
+        path="/"
+        keywords="school management software India, construction site management software, hospital management software India, industrial security system for factories, RudhiCore, RudhiArch"
+        jsonLd={organizationSchema}
+      />
+
       {/* HERO */}
       <section className="rs-hero" id="home" ref={heroRef}>
         <div className="rs-hero-bg">
@@ -155,25 +141,25 @@ export default function HomePage() {
         <div className="rs-hero-content">
           <div className="rs-hero-badge">
             <span className="rs-hero-badge-dot" />
-            Now Available for Projects 2026
+            Trusted by Schools, Contractors, Hospitals & Factories
           </div>
           <h1 className="rs-hero-title">
-            Transform Your Business with{" "}
-            <span className="rs-hero-title-gradient">{heroTitleText}</span>
+            Ready-made software for schools, construction sites, hospitals,{" "}
+            <span className="rs-hero-title-gradient">and industrial security</span>
+            {" "}— plus custom builds.
           </h1>
           <p className="rs-hero-subtitle">
-            We build scalable, secure, and AI-powered software solutions that drive innovation,
-            accelerate growth, and create lasting competitive advantages for businesses worldwide.
+            Deploy in days, not months. Built for Indian businesses.
           </p>
           <div className="rs-hero-buttons">
-            <a href="#contact" className="rs-btn rs-btn-primary">
-              <span>Start Your Project</span>
+            <a href="#products" className="rs-btn rs-btn-primary">
+              <span>See our products</span>
               <span className="rs-btn-icon">→</span>
             </a>
-            <a href="#services" className="rs-btn rs-btn-secondary">
-              <span className="rs-btn-icon">▶</span>
-              <span>Watch Demo</span>
-            </a>
+            <Link to="/contact" className="rs-btn rs-btn-secondary">
+              <span className="rs-btn-icon"><FaCalendarAlt /></span>
+              <span>Book a demo</span>
+            </Link>
           </div>
           <div className="rs-hero-stats">
             {[["15+", "Projects Delivered"], ["98%", "Client Satisfaction"], ["10+", "Tech Experts"]].map(([num, label]) => (
@@ -197,12 +183,12 @@ export default function HomePage() {
         <div className="rs-container">
           <div className="rs-about-grid">
             <div className="rs-about-content rs-reveal-left">
-              <span className="rs-section-badge"><span>🚀</span> About Us</span>
+              <span className="rs-section-badge"><span><FaRocket /></span> About Us</span>
               <h2 className="rs-section-title">We're Redefining What's <span>Possible</span> in Technology</h2>
               <p className="rs-about-description">At RUDHISOFT, we're more than just a software company — we're your strategic technology partner. Our team of innovators, engineers, and strategists work together to deliver solutions that transform businesses and create lasting impact.</p>
               <p className="rs-about-description">From startups to enterprises, we've helped organizations across the globe leverage cutting-edge technology to solve complex challenges and unlock new opportunities.</p>
               <div className="rs-about-features">
-                {[["🎯", "Mission-Driven", "Focused on your success"], ["💡", "Innovation First", "Cutting-edge solutions"], ["🤝", "True Partnership", "Long-term collaboration"], ["⚡", "Agile Delivery", "Fast & efficient"]].map(([icon, h, p]) => (
+                {[[<FaBullseye />, "Mission-Driven", "Focused on your success"], [<FaLightbulb />, "Innovation First", "Cutting-edge solutions"], [<FaHandshake />, "True Partnership", "Long-term collaboration"], [<FaBolt />, "Agile Delivery", "Fast & efficient"]].map(([icon, h, p]) => (
                   <div className="rs-about-feature" key={h}>
                     <div className="rs-about-feature-icon">{icon}</div>
                     <div><h4>{h}</h4><p>{p}</p></div>
@@ -222,7 +208,7 @@ export default function HomePage() {
                 />
               </div>
               <div className="rs-about-float-card">
-                <div className="rs-about-float-icon">🏆</div>
+                <div className="rs-about-float-icon"><FaTrophy /></div>
                 <div className="rs-about-float-content">
                   <h4>10+ Years</h4>
                   <p>Industry Experience</p>
@@ -233,62 +219,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section className="rs-services" id="services">
+      {/* PRODUCTS */}
+      <section className="rs-services" id="products">
         <div className="rs-container">
           <div className="rs-services-header rs-reveal">
-            <span className="rs-section-badge"><span>⚙️</span> Our Services</span>
-            <h2 className="rs-section-title">Comprehensive <span>Solutions</span> for Modern Businesses</h2>
-            <p className="rs-section-subtitle" style={{ margin: "0 auto" }}>From ideation to deployment, we provide end-to-end technology services designed to accelerate your digital transformation journey.</p>
+            <span className="rs-section-badge"><span><FaRocket /></span> Our Products</span>
+            <h2 className="rs-section-title">Ready-Made <span>Software</span>, Built for Your Industry</h2>
+            <p className="rs-section-subtitle" style={{ margin: "0 auto" }}>Purpose-built platforms for schools, contractors, hospitals, and factories — deploy in days, not months.</p>
           </div>
           <div className="rs-services-grid rs-stagger">
-            {services.map((s) => (
-              <div className="rs-service-card" key={s.title}>
-                <div className="rs-service-icon">{s.icon}</div>
-                <h3>{s.title}</h3>
-                <p>{s.desc}</p>
-                <a href="#" className="rs-service-link">Learn More <span>→</span></a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* WHY US */}
-      <section className="rs-why-us" id="why-us">
-        <div className="rs-container">
-          <div className="rs-why-us-header rs-reveal">
-            <span className="rs-section-badge"><span>✨</span> Why Choose Us</span>
-            <h2 className="rs-section-title">The <span>RUDHISOFT</span> Advantage</h2>
-            <p className="rs-section-subtitle" style={{ margin: "0 auto" }}>We combine deep technical expertise with business acumen to deliver solutions that create real, measurable value.</p>
-          </div>
-          <div className="rs-why-us-grid rs-stagger">
-            {whyCards.map((c) => (
-              <div className="rs-why-card" key={c.title}>
-                <div className="rs-why-icon">{c.icon}</div>
-                <h3>{c.title}</h3>
-                <p>{c.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PROCESS */}
-      <section className="rs-process" id="process">
-        <div className="rs-container">
-          <div className="rs-process-header rs-reveal">
-            <span className="rs-section-badge"><span>📋</span> Our Process</span>
-            <h2 className="rs-section-title">A Proven Path to <span>Success</span></h2>
-            <p className="rs-section-subtitle" style={{ margin: "0 auto" }}>Our structured methodology ensures transparency, quality, and predictable outcomes at every stage of your project.</p>
-          </div>
-          <div className="rs-process-timeline rs-stagger">
-            {processSteps.map((s) => (
-              <div className="rs-process-step" key={s.num}>
-                <div className="rs-process-number">{s.num}</div>
-                <div className="rs-process-content">
-                  <h3>{s.title}</h3>
-                  <p>{s.desc}</p>
+            {products.map((p) => (
+              <div className="rs-service-card" key={p.name}>
+                <div className="rs-service-icon">{p.icon}</div>
+                <h3>{p.name}</h3>
+                <p style={{ fontWeight: 600, color: "var(--gray-900)", marginBottom: "8px" }}>{p.tag}</p>
+                <p>{p.desc}</p>
+                <div className="rs-product-ctas">
+                  <Link to={p.url} className="rs-link-primary">View features →</Link>
+                  <Link to="/contact" className="rs-link-secondary">Book demo</Link>
                 </div>
               </div>
             ))}
@@ -296,42 +244,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TECHNOLOGY */}
-      <section className="rs-technology" id="technology">
-        <div className="rs-tech-bg">
-          <video autoPlay muted loop playsInline>
-            <source src={techBgVideo} type="video/mp4" />
-          </video>
-        </div>
-        <div className="rs-tech-overlay" />
-        <div className="rs-container rs-tech-content">
-          <div className="rs-tech-header rs-reveal">
-            <span className="rs-section-badge"><span>🔬</span> Technology Stack</span>
-            <h2 className="rs-section-title">Powered by <span>Cutting-Edge</span> Technology</h2>
-            <p className="rs-section-subtitle" style={{ margin: "0 auto" }}>We leverage the latest technologies and frameworks to build future-proof solutions that drive innovation.</p>
-          </div>
-          <div className="rs-tech-grid rs-stagger">
-            {techCards.map((c) => (
-              <div className="rs-tech-card" key={c.title}>
-                <div className="rs-tech-card-icon">{c.icon}</div>
-                <h3>{c.title}</h3>
-                <p>{c.desc}</p>
-                <ul className="rs-tech-list">
-                  {c.list.map((item) => <li key={item}>{item}</li>)}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
+      {/* SOCIAL PROOF */}
       <section className="rs-testimonials" id="testimonials">
         <div className="rs-container">
           <div className="rs-testimonials-header rs-reveal">
-            <span className="rs-section-badge"><span>💬</span> Testimonials</span>
-            <h2 className="rs-section-title">What Our <span>Clients</span> Say</h2>
-            <p className="rs-section-subtitle" style={{ margin: "0 auto" }}>Don't just take our word for it — hear from the businesses we've helped transform.</p>
+            <span className="rs-section-badge"><span><FaCommentDots /></span> Social Proof</span>
+            <h2 className="rs-section-title">Trusted by <span>Schools, Contractors & Hospitals</span></h2>
+            <p className="rs-section-subtitle" style={{ margin: "0 auto" }}>Real outcomes from schools, contractors, hospitals, and factories using our software.</p>
           </div>
           <div className="rs-testimonials-grid rs-stagger">
             {testimonials.map((t) => (
@@ -348,37 +267,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* INDUSTRIES */}
-      <section className="rs-industries" id="industries">
+      {/* CUSTOM SOFTWARE SECTION */}
+      <section className="rs-custom-software" id="custom-software">
         <div className="rs-container">
-          <div className="rs-industries-header rs-reveal">
-            <span className="rs-section-badge"><span>🏢</span> Industries</span>
-            <h2 className="rs-section-title">Industries We <span>Serve</span></h2>
-            <p className="rs-section-subtitle" style={{ margin: "0 auto" }}>Deep domain expertise across diverse sectors enables us to deliver solutions that truly understand your business.</p>
-          </div>
-          <div className="rs-industries-grid rs-stagger">
-            {industries.map((ind) => (
-              <div className="rs-industry-card" key={ind.title}>
-                <span className="rs-industry-icon">{ind.icon}</span>
-                <h3>{ind.title}</h3>
-                <p>{ind.desc}</p>
-              </div>
-            ))}
+          <div className="rs-custom-software-inner rs-reveal">
+            <span className="rs-section-badge"><span><FaTools /></span> Custom Software</span>
+            <h2 className="rs-section-title">Need Something <span>Specific?</span></h2>
+            <ul>
+              <li>We build custom ERP/CRM, AI automation, and integrations for B2B companies.</li>
+            </ul>
+            <Link to="/services/custom-software-development" className="rs-btn rs-btn-primary">
+              <span>Talk to our solutions team</span>
+              <span className="rs-btn-icon">→</span>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="rs-cta" id="contact">
+      {/* FOOTER CTA BAND */}
+      <section className="rs-footer-cta-band" id="contact">
         <div className="rs-container">
-          <div className="rs-cta-content rs-reveal">
-            <h2 className="rs-cta-title">Ready to Transform Your Business?</h2>
-            <p className="rs-cta-text">Let's discuss how RUDHISOFT can help you leverage technology to achieve your business goals. Get a free consultation today.</p>
-            <div className="rs-cta-buttons">
-              <a href="mailto:info@rudhisoft.com" className="rs-btn rs-btn-primary"><span>Schedule a Call</span><span className="rs-btn-icon">📞</span></a>
-              <a href="#services" className="rs-btn rs-btn-secondary"><span>View Our Work</span><span className="rs-btn-icon">→</span></a>
-            </div>
-          </div>
+          <p>Not sure which product fits? Get a free 20-min consultation.</p>
+          <Link to="/contact" className="rs-btn" style={{ background: "var(--white)", color: "var(--primary)" }}>
+            <span>Book a free consultation</span>
+            <span className="rs-btn-icon">→</span>
+          </Link>
         </div>
       </section>
 

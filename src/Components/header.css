@@ -43,7 +43,7 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 20px 0;
+  padding: 28px 0;
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
   transition: padding var(--transition-base);
@@ -126,6 +126,147 @@
 }
 
 /* =========================
+   OUR PRODUCTS DROPDOWN (desktop)
+========================== */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 16px;
+  font-size: 0.88rem;
+  font-family: var(--font-primary);
+  font-weight: 500;
+  color: var(--gray-600);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: color var(--transition-base), background var(--transition-base);
+  white-space: nowrap;
+}
+
+.nav-dropdown-trigger:hover,
+.nav-dropdown.open .nav-dropdown-trigger {
+  color: var(--primary);
+}
+
+.nav-dropdown-trigger.active {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.nav-dropdown-caret {
+  font-size: 0.7em;
+  transition: transform var(--transition-base);
+}
+
+.nav-dropdown.open .nav-dropdown-caret {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 280px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity var(--transition-base), transform var(--transition-base), visibility var(--transition-base);
+  z-index: 500;
+}
+
+.nav-dropdown-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav-dropdown-menu li a {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  color: var(--gray-700) !important;
+  font-weight: 500;
+}
+
+.nav-dropdown-menu li a::after {
+  display: none;
+}
+
+.nav-dropdown-menu li a:hover,
+.nav-dropdown-menu li a.active {
+  background: var(--gray-50);
+  color: var(--primary) !important;
+}
+
+.nav-dropdown-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--gray-50);
+  color: var(--primary);
+}
+
+.nav-dropdown-menu li a:hover .nav-dropdown-icon,
+.nav-dropdown-menu li a.active .nav-dropdown-icon {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.nav-dropdown-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.nav-dropdown-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.nav-dropdown-blurb {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--gray-500);
+}
+
+.header.transparent .nav-dropdown-trigger {
+  color: #ffffff !important;
+}
+
+.header.transparent .nav-dropdown-trigger.active {
+  color: #222121 !important;
+  font-weight: 600;
+}
+
+.header.scrolled .nav-dropdown-trigger:hover,
+.header.scrolled .nav-dropdown.open .nav-dropdown-trigger {
+  color: var(--primary) !important;
+}
+
+.header.scrolled .nav-dropdown-trigger.active {
+  color: var(--primary) !important;
+}
+
+/* =========================
    TRANSPARENT STATE
    ✅ HOME PAGE ONLY — before scroll
    Logo + nav links = WHITE
@@ -168,8 +309,8 @@
    All pages — white backdrop + dark text
 ========================== */
 .header.scrolled {
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 18px;
+  padding-bottom: 18px;
 }
 
 .header.scrolled::before {
@@ -215,7 +356,7 @@
   width: 90%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 20px 0 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -234,6 +375,7 @@
   text-decoration: none;
   flex-shrink: 0;
   min-width: 0;
+  margin-left: 0;
 }
 
 .logo-icon {
@@ -273,6 +415,7 @@
 nav {
   display: flex;
   align-items: center;
+  margin-left: 50px;
 }
 
 /* =========================
@@ -389,6 +532,10 @@ nav {
    RESPONSIVE — Tablet & below (≤1024px)
 ========================== */
 @media (max-width: 1024px) {
+  nav {
+    margin-left: 0;
+  }
+
   .nav-links {
     position: fixed;
     top: 0;
@@ -462,6 +609,46 @@ nav {
     margin-bottom: 4px;
   }
 
+  /* Our Products dropdown in mobile drawer */
+  .nav-dropdown-trigger,
+  .header.transparent .nav-dropdown-trigger,
+  .header.scrolled .nav-dropdown-trigger {
+    width: 100%;
+    justify-content: space-between;
+    color: var(--gray-700) !important;
+    padding: 14px 18px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: var(--radius-md);
+  }
+
+  .nav-dropdown-trigger.active {
+    color: var(--primary) !important;
+    font-weight: 600;
+  }
+
+  .nav-dropdown-menu {
+    position: static;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 0 0 12px;
+    margin: 0;
+    transition: max-height var(--transition-slow);
+  }
+
+  .nav-dropdown-menu.active {
+    max-height: 400px;
+    padding: 4px 0 8px 12px;
+  }
+
+  .nav-dropdown-menu li a {
+    padding: 12px 16px;
+  }
+
   .nav-cta {
     margin: 14px 0 0 0;
   }
@@ -490,18 +677,22 @@ nav {
 ========================== */
 @media (max-width: 768px) {
   .header {
-    padding-top: 14px;
-    padding-bottom: 14px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
   .header.scrolled {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 14px;
+    padding-bottom: 14px;
   }
 
   .header-container {
     width: 100%;
     padding: 0 16px;
+  }
+
+  .logo {
+    margin-left: 0;
   }
 
   .logo-icon {

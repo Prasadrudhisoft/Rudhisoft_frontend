@@ -1,33 +1,37 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import celebrationImg from '../assets/images/celebration.jpg';
+import teamCultureImg from '../assets/images/team-culture.jpg';
 import './careers.css';
+import { FaBalanceScale, FaBirthdayCake, FaBook, FaBriefcase, FaCheck, FaClipboardList, FaFileAlt, FaFistRaised, FaGift, FaGlassCheers, FaHandshake, FaHome, FaHospital, FaLightbulb, FaMapMarkerAlt, FaMoneyBillWave, FaPencilAlt, FaRocket, FaSearch, FaStar, FaTimes, FaUmbrellaBeach } from 'react-icons/fa';
 
 // ── Config ───────────────────────────────────────────────────────────────────
 const API_URL = 'https://admin.rudhisoft.com';
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const whyJoinCards = [
-  { icon: '🚀', title: 'Growth Opportunities', text: 'Clear career paths and continuous learning to help you reach your potential.' },
-  { icon: '💡', title: 'Innovation Culture', text: 'Work on cutting-edge projects with the latest technologies.' },
-  { icon: '🤝', title: 'Great Team', text: 'Collaborate with talented professionals who inspire and support each other.' },
-  { icon: '⚖️', title: 'Work-Life Balance', text: 'Flexible work arrangements to help you maintain a healthy balance.' },
+  { icon: <FaRocket />, title: 'Growth Opportunities', text: 'Clear career paths and continuous learning to help you reach your potential.' },
+  { icon: <FaLightbulb />, title: 'Innovation Culture', text: 'Work on cutting-edge projects with the latest technologies.' },
+  { icon: <FaHandshake />, title: 'Great Team', text: 'Collaborate with talented professionals who inspire and support each other.' },
+  { icon: <FaBalanceScale />, title: 'Work-Life Balance', text: 'Flexible work arrangements to help you maintain a healthy balance.' },
 ];
 
 const benefitsList = [
-  { icon: '💰', label: 'Competitive Salary' },
-  { icon: '🏥', label: 'Health Insurance' },
-  { icon: '🏠', label: 'Remote Work Options' },
-  { icon: '📚', label: 'Learning Budget' },
-  { icon: '🏖️', label: 'Paid Time Off' },
-  { icon: '🎉', label: 'Team Events' },
-  { icon: '💪', label: 'Gym Membership' },
-  { icon: '🎂', label: 'Birthday Leave' },
+  { icon: <FaMoneyBillWave />, label: 'Competitive Salary' },
+  { icon: <FaHospital />, label: 'Health Insurance' },
+  { icon: <FaHome />, label: 'Remote Work Options' },
+  { icon: <FaBook />, label: 'Learning Budget' },
+  { icon: <FaUmbrellaBeach />, label: 'Paid Time Off' },
+  { icon: <FaGlassCheers />, label: 'Team Events' },
+  { icon: <FaFistRaised />, label: 'Gym Membership' },
+  { icon: <FaBirthdayCake />, label: 'Birthday Leave' },
 ];
 
 const cultureItems = [
   { src: '/static/images/culture/office.jpg', fallback: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=500&fit=crop', label: 'Our Modern Office' },
   { src: '/static/images/culture/team-meeting.jpg', fallback: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400&h=200&fit=crop', label: 'Team Collaboration' },
-  { src: '/static/images/culture/celebration.jpg', fallback: 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=400&h=200&fit=crop', label: 'Celebrations' },
+  { src: celebrationImg, fallback: 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=400&h=200&fit=crop', label: 'Celebrations' },
   { src: '/static/images/culture/hackathon.jpg', fallback: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=200&fit=crop', label: 'Hackathons & Events' },
   { src: '/static/images/culture/learning.jpg', fallback: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=200&fit=crop', label: 'Continuous Learning' },
 ];
@@ -64,7 +68,7 @@ function WhyJoin() {
     <section className="why-join">
       <div className="container">
         <div className="why-join-header reveal">
-          <span className="section-badge"><span>🌟</span> Why RUDHISOFT</span>
+          <span className="section-badge"><span><FaStar /></span> Why RUDHISOFT</span>
           <h2 className="section-title">Why Join <span>Us?</span></h2>
           <p className="section-subtitle">We offer more than just a job — we offer a career with purpose.</p>
         </div>
@@ -88,7 +92,7 @@ function Benefits() {
       <div className="container">
         <div className="benefits-grid">
           <div className="benefits-content reveal-left">
-            <span className="section-badge"><span>🎁</span> Perks & Benefits</span>
+            <span className="section-badge"><span><FaGift /></span> Perks & Benefits</span>
             <h2>Benefits That <span>Matter</span></h2>
             <p>
               We believe in taking care of our team. Here's what you can expect
@@ -106,7 +110,7 @@ function Benefits() {
           <div className="benefits-image reveal-right">
             <div className="benefits-image-wrapper">
               <img
-                src="/static/images/team-benefits.jpg"
+                src={teamCultureImg}
                 alt="Team Benefits"
                 onError={e => { e.target.src = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop'; }}
               />
@@ -129,8 +133,8 @@ function JobCard({ job, onApply }) {
       <div className="job-info">
         <h3>{job.title}</h3>
         <div className="job-meta">
-          <span className="job-meta-item"><span>📍</span> {job.location}</span>
-          <span className="job-meta-item"><span>💼</span> {job.job_type}</span>
+          <span className="job-meta-item"><span><FaMapMarkerAlt /></span> {job.location}</span>
+          <span className="job-meta-item"><span><FaBriefcase /></span> {job.job_type}</span>
         </div>
         <div className="job-tags">
           <span className="job-tag">{job.job_type}</span>
@@ -174,7 +178,7 @@ function OpenPositions({ onApply }) {
     <section className="positions">
       <div className="container">
         <div className="positions-header reveal">
-          <span className="section-badge"><span>📋</span> Open Positions</span>
+          <span className="section-badge"><span><FaClipboardList /></span> Open Positions</span>
           <h2 className="section-title">Current <span>Openings</span></h2>
           <p className="section-subtitle">Find the perfect role that matches your skills and aspirations.</p>
         </div>
@@ -196,7 +200,7 @@ function OpenPositions({ onApply }) {
 
         {!loading && (error || jobs.length === 0) && (
           <div className="no-jobs">
-            <div className="no-jobs-icon">🔍</div>
+            <div className="no-jobs-icon"><FaSearch /></div>
             <h3>{error ? 'Unable to load jobs' : 'No positions available'}</h3>
             <p>
               {error
@@ -305,13 +309,13 @@ function ApplicationModal({ isOpen, jobId, jobTitle, onClose }) {
             <h2 id="modalHeading">Apply for Position</h2>
             <p>{jobTitle}</p>
           </div>
-          <button className="modal-close" onClick={handleClose} aria-label="Close modal">✕</button>
+          <button className="modal-close" onClick={handleClose} aria-label="Close modal"><FaTimes /></button>
         </div>
 
         <div className="modal-body">
           {message && (
             <div className={`form-message ${message.type}`}>
-              <span>{message.type === 'success' ? '✓' : '✕'}</span>
+              <span>{message.type === 'success' ? <FaCheck /> : <FaTimes />}</span>
               <span>{message.text}</span>
             </div>
           )}
@@ -355,7 +359,7 @@ function ApplicationModal({ isOpen, jobId, jobTitle, onClose }) {
                   ref={fileInputRef} type="file" accept=".pdf,.doc,.docx"
                   onChange={handleFileChange} style={{ display: 'none' }}
                 />
-                <div className="file-upload-icon">📄</div>
+                <div className="file-upload-icon"><FaFileAlt /></div>
                 <p className="file-upload-text"><span>Click to upload</span> or drag and drop</p>
                 <p className="file-upload-hint">PDF, DOC, DOCX (Max 5MB)</p>
               </div>
@@ -366,7 +370,7 @@ function ApplicationModal({ isOpen, jobId, jobTitle, onClose }) {
                   <span
                     className="remove-file"
                     onClick={e => { e.stopPropagation(); setResumeFile(null); if (fileInputRef.current) fileInputRef.current.value = ''; }}
-                  >✕</span>
+                  ><FaTimes /></span>
                 </div>
               )}
             </div>
@@ -399,7 +403,7 @@ function CultureGallery() {
     <section className="culture">
       <div className="container">
         <div className="culture-header reveal">
-          <span className="section-badge"><span>🎉</span> Life at RUDHISOFT</span>
+          <span className="section-badge"><span><FaGlassCheers /></span> Life at RUDHISOFT</span>
           <h2 className="section-title">Our <span>Culture</span></h2>
           <p className="section-subtitle">A glimpse into what it's like to be part of our team.</p>
         </div>
@@ -424,7 +428,7 @@ function HiringProcess() {
     <section className="hiring-process">
       <div className="container">
         <div className="hiring-header reveal">
-          <span className="section-badge"><span>📝</span> How We Hire</span>
+          <span className="section-badge"><span><FaPencilAlt /></span> How We Hire</span>
           <h2 className="section-title">Our Hiring <span>Process</span></h2>
           <p className="section-subtitle">Simple, transparent, and respectful of your time.</p>
         </div>
@@ -454,7 +458,7 @@ function CTA() {
           </p>
           <div className="cta-buttons">
             <a href="mailto:careers@rudhisoft.com" className="btn btn-primary">Send Your Resume →</a>
-            <a href="/contact" className="btn btn-secondary">Contact Us</a>
+            <Link to="/contact" className="btn btn-secondary">Contact Us</Link>
           </div>
         </div>
       </div>
