@@ -52,8 +52,7 @@ export default function CaseStudiesListing() {
       <div className="container">
         {/* <FaExclamationTriangle /> Remove this banner once real client data replaces placeholders below */}
         <div className="cs-placeholder-banner ip-reveal">
-          <FaExclamationTriangle /> This page currently shows placeholder structure only. Replace with real client
-          data in <code>src/data/caseStudies.js</code> before publishing live.
+          <FaExclamationTriangle /> Coming soon <code>src/data/caseStudies.js</code> 
         </div>
 
         {/* PRODUCT CASE STUDIES */}

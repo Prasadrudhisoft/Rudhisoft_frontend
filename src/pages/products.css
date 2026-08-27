@@ -77,7 +77,7 @@
 .product-page .btn-secondary {
   background: transparent;
   border: 2px solid var(--gray-300);
-  color: var(--gray-800);
+  color:#fafcff;
 }
 .product-page .btn-secondary:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-3px); }
 

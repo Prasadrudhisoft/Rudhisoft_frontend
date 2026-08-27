@@ -38,6 +38,54 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="container">
+
+        {/* ── Direct demo CTA ─────────────────────────── */}
+        <div
+          className="footer-demo-cta"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "20px",
+            padding: "28px 0",
+            marginBottom: "32px",
+            borderBottom: "1px solid rgba(255,255,255,0.12)",
+          }}
+        >
+          <p
+            style={{
+              margin: 0,
+              maxWidth: "620px",
+              color: "rgba(255,255,255,0.75)",
+              fontSize: "0.95rem",
+              lineHeight: 1.6,
+            }}
+          >
+            Rudhisoft builds ready-to-deploy and custom software for education, construction, healthcare, and industrial businesses.
+          </p>
+          <Link
+            to="/contact"
+            className="footer-demo-btn"
+            style={{
+              flexShrink: 0,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "12px 24px",
+              borderRadius: "8px",
+              background: "var(--primary-gradient, var(--primary))",
+              color: "var(--white, #fff)",
+              fontWeight: 600,
+              fontSize: "0.95rem",
+              textDecoration: "none",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Book a demo →
+          </Link>
+        </div>
+
         <div className="footer-grid">
 
           {/* ── Brand Column ─────────────────────────────── */}
@@ -57,11 +105,12 @@ const Footer = () => {
             </Link>
 
             <p>
-              Ready-made software for schools, construction sites, hospitals, and industrial
-              security — plus custom builds. Deploy in days, not months.
+              Ready-to-deploy software for schools, contractors, hospitals, and factories —
+              plus custom software development.
             </p>
 
             <div className="footer-social">
+              {/* NOTE: replace these href="#" values with your actual profile URLs */}
               <a href="#" aria-label="LinkedIn"><FaLinkedin /></a>
               <a href="#" aria-label="Twitter"><FaTwitter /></a>
               <a href="#" aria-label="GitHub"><FaGithub /></a>
@@ -116,7 +165,10 @@ const Footer = () => {
             <div className="footer-contact-item">
               <div className="footer-contact-icon"><FaEnvelope /></div>
               <div className="footer-contact-text">
-                <a href="mailto:director@rudhisoft.com">director@rudhisoft.com</a>
+                <a href="mailto:director@rudhisoft.com">Sales: director@rudhisoft.com</a>
+                <br />
+                {/* NOTE: update this if your support inbox is different */}
+                <a href="mailto:support@rudhisoft.com">Support: support@rudhisoft.com</a>
               </div>
             </div>
 
@@ -135,7 +187,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  13, Maruti Plaza, Vidya Vikas Circle, Gangapur Rd, Nasik, Maharashtra 422005
+                  13, Maruti Plaza, Vidya Vikas Circle, Gangapur Rd, Nashik, Maharashtra 422005
                 </a>
               </div>
             </div>
