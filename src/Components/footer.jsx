@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/images/logo.png';
+import logo from '../assets/images/logofooter.png';
 import "./footer.css";
 import { FaLinkedin, FaTwitter, FaGithub, FaInstagram, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 
@@ -13,6 +13,7 @@ const Footer = () => {
       { href: '/about', label: 'About Us' },
       { href: '/services', label: 'Services' },
       { href: '/technology', label: 'Technologies' },
+      { href: '/leadership', label: 'Leadership' },
       { href: '/careers', label: 'Careers' },
       { href: '/contact', label: 'Contact' },
     ],
@@ -32,6 +33,8 @@ const Footer = () => {
       { href: '/services/custom-software-development', label: 'Custom Software Development' },
       { href: '/case-studies', label: 'Case Studies' },
       { href: '/blog', label: 'Blog' },
+      { href: '/resources/faqs', label: 'FAQs' },
+      { href: '/resources/guides-checklists', label: 'Guides & Checklists' },
     ],
   };
 

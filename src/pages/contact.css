@@ -238,6 +238,7 @@ nav { display: flex; align-items: center; }
 .contact-card:hover { background: var(--white); border-color: var(--gray-200); box-shadow: var(--shadow-lg); transform: translateX(5px); }
 
 .contact-card-icon {
+  color: var(--gold);
   width: 56px; height: 56px;
   background: linear-gradient(135deg, rgba(46,49,146,0.1), rgba(124,58,237,0.1));
   border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center;

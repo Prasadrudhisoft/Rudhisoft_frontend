@@ -1,31 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
-import { FaGraduationCap, FaHardHat, FaHospital, FaLock, FaIndustry } from 'react-icons/fa';
+import {
+  FaBlog,
+  FaBook,
+  FaQuestionCircle,
+  FaUsers,
+  FaUserTie,
+  FaBriefcase,
+} from 'react-icons/fa';
 import "./header.css";
 
-const NAV_LINKS = [
-  { label: "Home",         href: "/"             },
-  { label: "About",        href: "/about"        },
+// Plain links, rendered in this exact order around the dropdowns below.
+const HOME_LINK = { label: "Home", href: "/" };
+const MID_LINKS = [
   { label: "Services",     href: "/services"     },
-  { label: "Technology",   href: "/technology"   },
+  { label: "Technology",   href: "/technology"    },
   { label: "Case Studies", href: "/case-studies" },
-  { label: "Blog",         href: "/blog"         },
-  { label: "Careers",      href: "/careers"      },
 ];
 
-const PRODUCT_LINKS = [
-  { label: "RudhiCore",                     icon: <FaGraduationCap />, href: "/products/rudhicore-school-college-management", blurb: "School & college management" },
-  { label: "RudhiArch",                     icon: <FaHardHat />,       href: "/products/rudhiarch-construction-site-erp",      blurb: "Construction site ERP" },
-  { label: "Hospital Management System",    icon: <FaHospital />,      href: "/products/hospital-management-system",           blurb: "Hospital & clinic management" },
-  { label: "Industrial Gate In-Out System", icon: <FaLock />,          href: "/products/industry-security-system",             blurb: "Industrial access & security" },
+const RESOURCE_LINKS = [
+  { label: "Blog",                  icon: <FaBlog />,           href: "/blog",                        blurb: "News, updates & insights" },
+  { label: "Guides & Checklists",   icon: <FaBook />,           href: "/resources/guides-checklists", blurb: "Practical how-tos" },
+  { label: "FAQs",                  icon: <FaQuestionCircle />, href: "/resources/faqs",               blurb: "Common questions answered" },
 ];
 
-const INDUSTRY_LINKS = [
-  { label: "Education",                   icon: <FaGraduationCap />, href: "/industries/education-school-college-management", blurb: "Schools & colleges" },
-  { label: "Construction & Infrastructure", icon: <FaHardHat />,      href: "/industries/construction-site-management",        blurb: "Contractors & site teams" },
-  { label: "Healthcare",                  icon: <FaHospital />,       href: "/industries/hospital-clinic-management",           blurb: "Clinics & hospitals" },
-  { label: "Manufacturing & Industrial",  icon: <FaIndustry />,       href: "/industries/manufacturing-industrial-security",   blurb: "Factories & warehouses" },
+const COMPANY_LINKS = [
+  { label: "About Us",    icon: <FaUsers />,     href: "/about",      blurb: "Who we are" },
+  { label: "Leadership",  icon: <FaUserTie />,   href: "/leadership",  blurb: "Meet the team" },
+  { label: "Careers",     icon: <FaBriefcase />, href: "/careers",     blurb: "Join RUDHISOFT" },
 ];
 
 export default function Header() {
@@ -43,14 +46,14 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
-  const [productsOpen, setProductsOpen] = useState(false);
-  const [industriesOpen, setIndustriesOpen] = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
+  const [companyOpen, setCompanyOpen] = useState(false);
 
   // ── Close menu on route change ────────────────────────────────────
   useEffect(() => {
     setMenuOpen(false);
-    setProductsOpen(false);
-    setIndustriesOpen(false);
+    setResourcesOpen(false);
+    setCompanyOpen(false);
   }, [location.pathname]);
 
   // ── Scroll detection ──────────────────────────────────────────────
@@ -102,10 +105,14 @@ export default function Header() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [menuOpen]);
 
-  const closeMenu  = () => { setMenuOpen(false); setProductsOpen(false); setIndustriesOpen(false); };
+  const closeMenu  = () => {
+    setMenuOpen(false);
+    setResourcesOpen(false);
+    setCompanyOpen(false);
+  };
   const toggleMenu = () => setMenuOpen((prev) => !prev);
-  const toggleProducts = () => setProductsOpen((prev) => !prev);
-  const toggleIndustries = () => setIndustriesOpen((prev) => !prev);
+  const toggleResources = () => setResourcesOpen((prev) => !prev);
+  const toggleCompany = () => setCompanyOpen((prev) => !prev);
 
   // ✅ "transparent" class on home + industry pages (dark hero) while not
   // scrolled = white text. "scrolled" = white backdrop + dark/gray text
@@ -150,7 +157,44 @@ export default function Header() {
               id="navLinks"
               role="list"
             >
-              {NAV_LINKS.map(({ label, href }) => (
+              {/* ── Home ─────────────────────────────────────── */}
+              <li key={HOME_LINK.href} role="listitem">
+                <Link
+                  to={HOME_LINK.href}
+                  className={activeLink === HOME_LINK.href ? "active" : ""}
+                  aria-current={activeLink === HOME_LINK.href ? "page" : undefined}
+                  onClick={closeMenu}
+                >
+                  {HOME_LINK.label}
+                </Link>
+              </li>
+
+              {/* ── Products ─────────────────────────────────── */}
+              <li role="listitem">
+                <Link
+                  to="/products"
+                  className={activeLink === "/products" ? "active" : ""}
+                  aria-current={activeLink === "/products" ? "page" : undefined}
+                  onClick={closeMenu}
+                >
+                  Products
+                </Link>
+              </li>
+
+              {/* ── Industries ─────────────────────────────────── */}
+              <li role="listitem">
+                <Link
+                  to="/industries"
+                  className={activeLink === "/industries" ? "active" : ""}
+                  aria-current={activeLink === "/industries" ? "page" : undefined}
+                  onClick={closeMenu}
+                >
+                  Industries
+                </Link>
+              </li>
+
+              {/* ── Services & Case Studies ───────────────────── */}
+              {MID_LINKS.map(({ label, href }) => (
                 <li key={href} role="listitem">
                   <Link
                     to={href}
@@ -163,25 +207,25 @@ export default function Header() {
                 </li>
               ))}
 
-              {/* ── Our Products dropdown ─────────────────────── */}
+              {/* ── Resources dropdown ─────────────────────── */}
               <li
-                className={`nav-dropdown${productsOpen ? " open" : ""}`}
+                className={`nav-dropdown${resourcesOpen ? " open" : ""}`}
                 role="listitem"
-                onMouseEnter={() => setProductsOpen(true)}
-                onMouseLeave={() => setProductsOpen(false)}
+                onMouseEnter={() => setResourcesOpen(true)}
+                onMouseLeave={() => setResourcesOpen(false)}
               >
                 <button
                   type="button"
-                  className={`nav-dropdown-trigger${PRODUCT_LINKS.some(p => p.href === activeLink) ? " active" : ""}`}
-                  onClick={toggleProducts}
+                  className={`nav-dropdown-trigger${RESOURCE_LINKS.some(r => r.href === activeLink) ? " active" : ""}`}
+                  onClick={toggleResources}
                   aria-haspopup="true"
-                  aria-expanded={productsOpen}
+                  aria-expanded={resourcesOpen}
                 >
-                  Our Products
+                  Resources
                   <span className="nav-dropdown-caret" aria-hidden="true">▾</span>
                 </button>
-                <ul className={`nav-dropdown-menu${productsOpen ? " active" : ""}`} role="list">
-                  {PRODUCT_LINKS.map(({ label, icon, href, blurb }) => (
+                <ul className={`nav-dropdown-menu${resourcesOpen ? " active" : ""}`} role="list">
+                  {RESOURCE_LINKS.map(({ label, icon, href, blurb }) => (
                     <li key={href} role="listitem">
                       <Link
                         to={href}
@@ -200,25 +244,25 @@ export default function Header() {
                 </ul>
               </li>
 
-              {/* ── Industries dropdown ─────────────────────── */}
+              {/* ── Company dropdown ─────────────────────── */}
               <li
-                className={`nav-dropdown${industriesOpen ? " open" : ""}`}
+                className={`nav-dropdown${companyOpen ? " open" : ""}`}
                 role="listitem"
-                onMouseEnter={() => setIndustriesOpen(true)}
-                onMouseLeave={() => setIndustriesOpen(false)}
+                onMouseEnter={() => setCompanyOpen(true)}
+                onMouseLeave={() => setCompanyOpen(false)}
               >
                 <button
                   type="button"
-                  className={`nav-dropdown-trigger${INDUSTRY_LINKS.some(i => i.href === activeLink) ? " active" : ""}`}
-                  onClick={toggleIndustries}
+                  className={`nav-dropdown-trigger${COMPANY_LINKS.some(c => c.href === activeLink) ? " active" : ""}`}
+                  onClick={toggleCompany}
                   aria-haspopup="true"
-                  aria-expanded={industriesOpen}
+                  aria-expanded={companyOpen}
                 >
-                  Industries
+                  Company
                   <span className="nav-dropdown-caret" aria-hidden="true">▾</span>
                 </button>
-                <ul className={`nav-dropdown-menu${industriesOpen ? " active" : ""}`} role="list">
-                  {INDUSTRY_LINKS.map(({ label, icon, href, blurb }) => (
+                <ul className={`nav-dropdown-menu${companyOpen ? " active" : ""}`} role="list">
+                  {COMPANY_LINKS.map(({ label, icon, href, blurb }) => (
                     <li key={href} role="listitem">
                       <Link
                         to={href}

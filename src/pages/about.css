@@ -1019,6 +1019,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mv-icon {
+  color: var(--gold);
   width: 56px;
   height: 56px;
   background: linear-gradient(135deg, rgba(46, 49, 146, 0.1), rgba(124, 58, 237, 0.1));
@@ -1119,6 +1120,105 @@ h1, h2, h3, h4, h5, h6 {
 
 .vision-card .mv-points li span {
   color: var(--accent);
+}
+
+/* =========================
+   OPERATING PRINCIPLES BOX
+   (Added — was missing; used by
+   .mv-principles, .mv-principles-title,
+   .mv-principles-list, .mv-principles-cta
+   in AboutUs.jsx)
+========================== */
+.mv-principles {
+  margin-top: 40px;
+  padding: 28px 22px;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (min-width: 768px) {
+  .mv-principles {
+    margin-top: 50px;
+    padding: 36px 32px;
+    border-radius: var(--radius-2xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .mv-principles {
+    margin-top: 60px;
+    padding: 40px 40px;
+  }
+}
+
+.mv-principles-title {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .mv-principles-title {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+}
+
+.mv-principles-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+}
+
+@media (min-width: 640px) {
+  .mv-principles-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mv-principles-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.mv-principles-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--gray-100);
+  font-size: 0.9rem;
+  color: var(--gray-700);
+}
+
+@media (min-width: 768px) {
+  .mv-principles-list li {
+    padding: 12px 0;
+    font-size: 0.95rem;
+  }
+}
+
+.mv-principles-list li span {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.mv-principles-cta {
+  text-align: center;
+  margin-top: 24px;
+}
+
+@media (min-width: 768px) {
+  .mv-principles-cta {
+    margin-top: 30px;
+  }
 }
 
 /* =========================
@@ -1238,6 +1338,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .value-icon {
+  color: var(--gold);
   width: 60px;
   height: 60px;
   background: linear-gradient(135deg, rgba(46, 49, 146, 0.1), rgba(124, 58, 237, 0.1));
@@ -1855,6 +1956,34 @@ h1, h2, h3, h4, h5, h6 {
   pointer-events: none;
 }
 
+/* Added — was missing; used by AboutUs.jsx for the
+   "Our Work in Numbers" heading wrapper */
+.achievements-header {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .achievements-header {
+    margin-bottom: 60px;
+  }
+}
+
+.achievements-header .section-title {
+  color: var(--white);
+}
+
+.achievements-header .section-title span {
+  background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: var(--white);
+  background-clip: initial;
+  color: var(--white);
+  opacity: 0.85;
+}
+
 .achievements-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1902,6 +2031,7 @@ h1, h2, h3, h4, h5, h6 {
 .achievement-icon {
   font-size: 1.5rem;
   margin-bottom: 10px;
+  color: var(--white);
 }
 
 @media (min-width: 768px) {
@@ -2050,6 +2180,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .culture-feature-icon {
+  color: var(--gold);
   width: 44px;
   height: 44px;
   background: linear-gradient(135deg, rgba(46, 49, 146, 0.1), rgba(124, 58, 237, 0.1));
@@ -2787,7 +2918,9 @@ button:focus-visible {
   to {
     transform: rotate(360deg);
   }
-}/* =========================
+}
+
+/* =========================
    FOUNDERS GRID (2 centered)
 ========================== */
 .founders-grid {
@@ -2824,9 +2957,16 @@ button:focus-visible {
 }
 
 .professionals-grid {
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.professionals-grid .professional-card {
+  width: 100px;
 }
 
 .professional-card {
@@ -2904,15 +3044,17 @@ button:focus-visible {
 ========================== */
 @media (max-width: 1200px) {
   .professionals-grid {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
+    gap: 24px 20px;
   }
 }
 
 @media (max-width: 768px) {
   .professionals-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 20px 16px;
+  }
+
+  .professionals-grid .professional-card {
+    width: 85px;
   }
 
   .founders-grid {
@@ -2932,8 +3074,11 @@ button:focus-visible {
 
 @media (max-width: 480px) {
   .professionals-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 18px 14px;
+  }
+
+  .professionals-grid .professional-card {
+    width: 72px;
   }
 
   .professional-image {
@@ -2943,9 +3088,5 @@ button:focus-visible {
 
   .professional-name {
     font-size: 0.65rem;
-  }
-
-  .professional-role {
-    font-size: 0.6rem;
   }
 }

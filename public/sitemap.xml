@@ -43,7 +43,42 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://rudhisoft.com/leadership</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://rudhisoft.com/resources/faqs</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://rudhisoft.com/resources/guides-checklists</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Products -->
+  <url>
+    <loc>https://rudhisoft.com/products</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://rudhisoft.com/industries</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <url>
     <loc>https://rudhisoft.com/products/rudhicore-school-college-management</loc>
     <lastmod>2026-08-24</lastmod>

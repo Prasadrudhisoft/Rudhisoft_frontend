@@ -275,16 +275,16 @@
   color: #ffffff !important;
 }
 
-.header.transparent .nav-links li a {
+.header.transparent .nav-links > li > a {
   color: #ffffff !important;
 }
 
-.header.transparent .nav-links li a:hover {
+.header.transparent .nav-links > li > a:hover {
   color: #ffffff !important;
   background: transparent;
 }
 
-.header.transparent .nav-links li a.active {
+.header.transparent .nav-links > li > a.active {
   color: #222121 !important;
   font-weight: 600;
 }
@@ -812,7 +812,7 @@ button:focus-visible {
   }
 
   .header.transparent .logo-text,
-  .header.transparent .nav-links li a {
+  .header.transparent .nav-links > li > a {
     color: var(--white) !important;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   }

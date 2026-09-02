@@ -249,6 +249,7 @@ nav { display: flex; align-items: center; }
 .why-join-card:hover { background: var(--white); transform: translateY(-8px); box-shadow: var(--shadow-xl); border-color: var(--gray-100); }
 
 .why-join-icon {
+  color: var(--gold);
   width: 70px; height: 70px;
   background: linear-gradient(135deg, rgba(46,49,146,0.1), rgba(124,58,237,0.1));
   border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -285,6 +286,7 @@ nav { display: flex; align-items: center; }
 }
 .benefit-item:hover { transform: translateX(5px); box-shadow: var(--shadow-md); }
 .benefit-item-icon {
+  color: var(--gold);
   width: 48px; height: 48px;
   background: linear-gradient(135deg, rgba(46,49,146,0.1), rgba(124,58,237,0.1));
   border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;

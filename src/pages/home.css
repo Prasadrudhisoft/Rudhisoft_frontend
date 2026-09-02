@@ -827,6 +827,7 @@ button {
 }
 
 .rs-about-feature-icon {
+  color: var(--gold);
   width: 48px;
   height: 48px;
   background: linear-gradient(135deg, rgba(46, 49, 146, 0.1), rgba(124, 58, 237, 0.1));
@@ -1076,6 +1077,7 @@ button {
 }
 
 .rs-service-icon {
+  color: var(--gold);
   width: 64px;
   height: 64px;
   background: linear-gradient(135deg, rgba(46, 49, 146, 0.1), rgba(124, 58, 237, 0.1));

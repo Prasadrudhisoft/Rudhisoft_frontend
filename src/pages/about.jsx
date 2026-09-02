@@ -3,7 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './about.css';
 import SEO, { organizationSchema, breadcrumbSchema } from '../Components/SEO';
-import { FaBalanceScale, FaBookOpen, FaBullseye, FaChartBar, FaChartLine, FaCheck, FaClipboardList, FaCloud, FaCompass, FaFistRaised, FaGem, FaGithub, FaGlassCheers, FaGlobeAsia, FaGraduationCap, FaHandshake, FaLaptopCode, FaLightbulb, FaLinkedin, FaMedal, FaPalette, FaRobot, FaRocket, FaSeedling, FaShieldAlt, FaSmile, FaStar, FaTrophy, FaTwitter, FaUnlockAlt, FaUserTie, FaUsers } from 'react-icons/fa';
+import {
+  FaBullseye, FaCheck, FaClipboardList, FaCompass, FaGem, FaHandshake,
+  FaLightbulb, FaRocket, FaShieldAlt, FaStar, FaTrophy, FaUsers,
+  FaIndustry, FaCogs, FaLifeRing, FaQuoteLeft,
+} from 'react-icons/fa';
 
 // Sub-components
 const SectionBadge = ({ icon, text }) => (
@@ -28,43 +32,10 @@ const ValueCard = ({ icon, title, description }) => (
   </div>
 );
 
-const TimelineItem = ({ year, title, description, isEven }) => (
-  <div className={`timeline-item ${isEven ? 'even' : ''}`}>
-    <div className="timeline-marker"></div>
-    <div className="timeline-content">
-      <span className="timeline-year">{year}</span>
-      <h3>{title}</h3>
-      <p>{description}</p>
-    </div>
-  </div>
-);
-
-const TeamCard = ({ image, name, role, description, socials }) => (
-  <div className="team-card">
-    <div className="team-image">
-      <img src={image} alt={name} loading="lazy" />
-      <div className="team-image-overlay">
-        <div className="team-social">
-          {socials.map((social, index) => (
-            <a key={index} href={social.link} aria-label={social.label}>
-              {social.icon}
-            </a>
-          ))}
-        </div>
-      </div>
-    </div>
-    <div className="team-info">
-      <h3>{name}</h3>
-      <p className="team-role">{role}</p>
-      <p>{description}</p>
-    </div>
-  </div>
-);
-
 const AchievementItem = ({ icon, number, label }) => (
   <div className="achievement-item">
     <div className="achievement-icon">{icon}</div>
-    <div className="achievement-number">{number}</div>
+    {number && <div className="achievement-number">{number}</div>}
     <div className="achievement-label">{label}</div>
   </div>
 );
@@ -89,115 +60,47 @@ const WhyWorkCard = ({ number, title, description }) => (
   </div>
 );
 
-const ExtendedTeamItem = ({ icon, title, count }) => (
-  <div className="extended-team-item">
-    <div className="extended-team-icon">{icon}</div>
-    <h4>{title}</h4>
-    <p>{count}</p>
-  </div>
-);
-
 // Main Component
 const AboutUs = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
 
-  // Data Arrays
+  // ─── Data ──────────────────────────────────────────────────────────────
   const introStats = [
     { number: '15+', label: 'Projects Delivered' },
-    { number: '98%', label: 'Client Satisfaction' },
-    { number: '10+', label: 'Tech Experts' },
+    { number: '98%', label: 'Trusted by businesses across Maharashtra' },
+    { number: '10+', label: 'Software Professionals and Specialists' },
   ];
 
-  const missionPoints = [
-    'Solve one real operational problem well, per product',
-    'Deploy fast — days, not months',
-    'Build lasting partnerships based on trust and transparency',
-    'Give every customer a clear path from problem to demo to go-live',
-  ];
-
-  const visionPoints = [
-    'Become the default ready-made software for Indian schools, contractors, hospitals, and factories',
-    'Keep our products simple enough to deploy without a lengthy implementation project',
-    'Take on custom builds where off-the-shelf genuinely isn\'t enough',
-    'Earn trust through outcomes, not marketing claims',
+  const operatingPrinciples = [
+    'Solve a real business problem.',
+    'Make implementation practical.',
+    'Build for daily adoption.',
+    'Communicate clearly.',
+    'Improve continuously.',
+    'Earn trust through outcomes.',
   ];
 
   const values = [
-    { icon: <FaLightbulb />, title: 'Innovation First', description: 'We embrace new ideas and technologies to solve complex challenges creatively.' },
-    { icon: <FaBullseye />, title: 'Excellence Always', description: 'We never settle for "good enough." Every interaction reflects our commitment to quality.' },
-    { icon: <FaHandshake />, title: 'Client Partnership', description: "We see ourselves as an extension of our clients' teams, invested in their success." },
-    { icon: <FaUnlockAlt />, title: 'Transparency', description: 'Open communication and honest feedback form the foundation of every relationship.' },
-    { icon: <FaChartLine />, title: 'Continuous Growth', description: 'We invest in learning and constantly evolve to stay at the forefront of technology.' },
-    { icon: <FaSeedling />, title: 'Sustainability', description: 'We build solutions designed for the long term, considering environmental impact.' },
-    { icon: <FaShieldAlt />, title: 'Integrity', description: "We do what's right, even when no one is watching. Ethics are non-negotiable." },
-    { icon: <FaUsers />, title: 'Collaboration', description: 'Great things happen when diverse minds work together. We celebrate teamwork.' },
-  ];
-
-  const timeline = [
-    { year: '2020', title: 'The Beginning', description: 'RUDHISOFT was founded by a small team of passionate developers with a vision to create technology that truly matters.' },
-    { year: '2021', title: 'First Major Client', description: 'Secured our first enterprise client and successfully delivered a large-scale ERP system.' },
-    { year: '2022', title: 'Global Expansion', description: 'Expanded operations internationally, opening offices in 3 countries. Team grew to 25+ members.' },
-    { year: '2023', title: 'AI & Cloud Focus', description: 'Launched dedicated AI and Cloud practices. Developed proprietary frameworks and tools.' },
-    { year: '2024', title: 'The Future is Now', description: 'Leading the charge in generative AI. 50+ team members serving clients across 15+ countries.' },
-  ];
-
-  const founders = [
-  {
-    image: '',
-    name: 'Prasad Jadhav',
-    role: 'Founder & CEO',
-    description: '20+ years of experience in technology leadership and business strategy.',
-    socials: [
-      { icon: <FaLinkedin />, link: '#', label: 'LinkedIn' },
-      { icon: <FaTwitter />, link: '#', label: 'Twitter' },
-    ],
-  },
-  {
-    image: '',
-    name: 'Vaishnavi Kadlag',
-    role: 'Co-Founder',
-    description: 'AI/ML expert with 15+ years building scalable enterprise systems.',
-    socials: [
-      { icon: <FaLinkedin />, link: '#', label: 'LinkedIn' },
-      { icon: <FaGithub />, link: '#', label: 'GitHub' },
-    ],
-  },
-];
-
-const professionals = [
-  { image: '', name: 'Priya Patel', role: 'CTO' },
-  { image: '', name: 'Atul Sahane', role: 'FullStack Developer' },
-  { image: '', name: 'Arjun Sharma', role: 'Lead Developer' },
-  { image: '', name: 'Anshika', role: 'UI/UX Designer' },
-  { image: '', name: 'Rohit Desai', role: 'Cloud Architect' },
-  { image: '', name: 'Neha Joshi', role: 'AI Specialist' },
-  { image: '', name: 'Vijay Shinde', role: 'DevOps Engineer' },
-  { image: '', name: 'Anjali Mehta', role: 'QA Lead' },
-
-];
-
-
-  const extendedTeam = [
-    { icon: <FaLaptopCode />, title: 'Engineering', count: '25+ Developers' },
-    { icon: <FaPalette />, title: 'Design', count: '8+ Designers' },
-    { icon: <FaCloud />, title: 'DevOps', count: '6+ Engineers' },
-    { icon: <FaRobot />, title: 'AI/ML', count: '5+ Specialists' },
-    { icon: <FaChartBar />, title: 'Analytics', count: '4+ Analysts' },
-    { icon: <FaShieldAlt />, title: 'QA', count: '6+ Testers' },
+    { icon: <FaLightbulb />, title: 'Practical Innovation', description: 'We use technology to solve real operational problems, not to add complexity.' },
+    { icon: <FaHandshake />, title: 'Customer Partnership', description: "We work as an extension of the customer's team and measure success by adoption and business impact." },
+    { icon: <FaShieldAlt />, title: 'Transparency and Integrity', description: 'We communicate honestly about scope, timelines, risks, and costs.' },
+    { icon: <FaGem />, title: 'Quality and Continuous Improvement', description: 'We build reliable systems, learn from feedback, and improve them over time.' },
+    { icon: <FaUsers />, title: 'Collaboration', description: 'We bring together business users, designers, developers, and domain experts to create better outcomes.' },
   ];
 
   const achievements = [
-    { icon: <FaTrophy />, number: '10+', label: 'Projects Completed' },
-    { icon: <FaSmile />, number: '98%', label: 'Client Satisfaction' },
-    { icon: <FaGlobeAsia />, number: '15+', label: 'Countries Served' },
-    { icon: <FaMedal />, number: '12+', label: 'Industry Awards' },
+    { icon: <FaTrophy />, number: '15+', label: 'Projects Delivered' },
+    { icon: <FaIndustry />,  label: 'Products built for four Operational Industries Served' },
+    { icon: <FaCogs />, label: 'Custom Software, ERP, CRM & Automation Capabilities' },
+    { icon: <FaLifeRing />, label: 'Ongoing Support for Deployed Systems' },
   ];
 
-  const cultureFeatures = [
-    { icon: <FaGraduationCap />, title: 'Continuous Learning', description: 'Access to courses, certifications, conferences, and learning resources.' },
-    { icon: <FaBalanceScale />, title: 'Work-Life Balance', description: 'Flexible hours, remote work options, and generous time off policies.' },
-    { icon: <FaGlassCheers />, title: 'Fun & Celebrations', description: 'Team events, hackathons, game nights, and celebration of milestones.' },
-    { icon: <FaFistRaised />, title: 'Health & Wellness', description: 'Comprehensive health benefits, gym memberships, and mental health support.' },
+  const cultureBullets = [
+    'Learning and certification support.',
+    'Flexible work arrangements, if applicable.',
+    'Mentorship and code reviews.',
+    'Team activities.',
+    'Clear ownership and growth opportunities.',
   ];
 
   const cultureImages = [
@@ -206,13 +109,12 @@ const professionals = [
     { src: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&h=250&fit=crop', alt: 'Office Space', large: true },
   ];
 
-  const whyWorkWithUs = [
-    { number: '01', title: 'Proven Track Record', description: '200+ successful projects delivered across diverse industries. Our portfolio speaks for our capabilities.' },
-    { number: '02', title: 'Technical Excellence', description: 'Our team comprises certified experts in cutting-edge technologies, from AI/ML to cloud architecture.' },
-    { number: '03', title: 'Agile Methodology', description: 'We follow industry-best agile practices ensuring transparency, flexibility, and faster time-to-market.' },
-    { number: '04', title: 'End-to-End Solutions', description: 'From ideation to deployment and beyond — we provide comprehensive services covering the entire lifecycle.' },
-    { number: '05', title: 'Dedicated Support', description: '24/7 support, dedicated project managers, and transparent communication ensure your project is on track.' },
-    { number: '06', title: 'Competitive Pricing', description: 'World-class solutions at competitive rates. We deliver maximum value without compromising quality.' },
+  const whyCustomersWorkWithUs = [
+    { number: '01', title: 'Start with a Working Product', description: 'Choose from ready-to-deploy products instead of starting every project from zero.' },
+    { number: '02', title: 'Adapt to Your Workflow', description: 'Configure the product or extend it when your process needs additional functionality.' },
+    { number: '03', title: 'Practical Implementation', description: 'We help with setup, data migration, training, and go-live.' },
+    { number: '04', title: 'One Technology Partner', description: 'Continue with us for enhancements, integrations, support, and custom development.' },
+    { number: '05', title: 'Direct Communication', description: 'Work with a focused team that understands your business context.' },
   ];
 
   // Scroll Effects
@@ -250,7 +152,7 @@ const professionals = [
 
       <SEO
         title="About Us"
-        description="RUDHISOFT is a Nashik-based technology company building ready-made software for schools, construction sites, hospitals, and industrial security — plus custom software builds."
+        description="RUDHISOFT is a Nashik-based technology company building ready-to-deploy software for schools, construction sites, hospitals, and industrial security — plus custom software builds."
         path="/about"
         keywords="about RUDHISOFT, software company Nashik, technology team India"
         jsonLd={[organizationSchema, breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'About Us', path: '/about' }])]}
@@ -263,29 +165,46 @@ const professionals = [
             <div className="intro-content reveal-left">
               <span className="intro-label">Who We Are</span>
               <h1 className="intro-title">
-                Ready-Made Software for <span>Real Industries</span>, Built by a Team That Ships
+                Ready-to-Deploy Software for <span>Real Industries</span>, Built by a Team That Delivers
               </h1>
               <p className="intro-text">
-                RUDHISOFT is a Nashik-based technology company building ready-made software for
-                schools, construction sites, hospitals, and industrial security — RudhiCore,
-                RudhiArch, our Hospital Management System, and Industry Security System — plus
-                custom software for businesses that need something off-the-shelf can't cover.
-              </p>
-              <p className="intro-text highlight">
-                "We don't build vague 'innovative solutions.' We solve specific problems —
-                admissions chaos, site visibility, patient queues, gate security — with software
-                that ships in days, not months."
+                Rudhisoft is a Nashik-based software company building practical technology for real
+                businesses. Our ready-to-deploy products help schools and colleges manage academic
+                and administrative operations, contractors coordinate construction sites, hospitals
+                digitize patient and billing workflows, and factories control gate entry and
+                industrial security.
               </p>
               <p className="intro-text">
-                Every product we build starts from a real operational pain point, not a feature
-                checklist. That's why our customers go live fast and keep using what we build.
+                When an existing product is not enough, we design and build custom ERP, CRM,
+                automation, portals, and integrations around the customer's actual workflow.
               </p>
+              <p className="intro-text">
+                We believe software should not merely be installed. It should be adopted, used
+                every day, and improved over time.
+              </p>
+
+              <blockquote className="intro-text highlight" style={{ borderLeft: '3px solid var(--primary, #6366f1)', paddingLeft: '16px', fontStyle: 'italic' }}>
+                <FaQuoteLeft style={{ opacity: 0.5, marginBottom: '8px' }} />
+                <p style={{ margin: 0 }}>
+                  We do not build vague "innovative solutions." We solve specific operational
+                  problems — admissions chaos, poor site visibility, patient queues, and
+                  gate-security gaps — with practical software.
+                </p>
+                <footer style={{ marginTop: '10px', fontStyle: 'normal', fontWeight: 600, fontSize: '0.9rem' }}>
+                  — Prasad Jadhav, Founder & Director, Rudhisoft
+                </footer>
+              </blockquote>
 
               <div className="intro-stats">
                 {introStats.map((stat, index) => (
                   <IntroStat key={index} {...stat} />
                 ))}
               </div>
+
+              <Link to="/#products" className="btn btn-secondary" style={{ marginTop: '24px', display: 'inline-flex' }}>
+                <span>Explore our products</span>
+                <span className="btn-icon">→</span>
+              </Link>
             </div>
 
             <div className="intro-visual reveal-right">
@@ -312,7 +231,7 @@ const professionals = [
 
               <div className="intro-badge-card">
                 <h4>98%</h4>
-                <p>Client Satisfaction</p>
+                <p>Trusted Across Maharashtra</p>
               </div>
             </div>
           </div>
@@ -323,10 +242,10 @@ const professionals = [
       <section className="mission-vision">
         <div className="container">
           <div className="mv-header reveal">
-            <SectionBadge icon=<FaBullseye /> text="Our Purpose" />
+            <SectionBadge icon={<FaBullseye />} text="Our Purpose" />
             <h2 className="section-title">Mission & <span>Vision</span></h2>
             <p className="section-subtitle">
-              Guided by purpose, driven by innovation — discover the principles that shape
+              Guided by purpose, driven by practicality — the principles that shape
               everything we do at RUDHISOFT.
             </p>
           </div>
@@ -336,30 +255,35 @@ const professionals = [
               <div className="mv-icon"><FaRocket /></div>
               <h3>Our Mission</h3>
               <p>
-                To give schools, contractors, hospitals, and factories software that solves their
-                actual day-to-day problems — admissions, site visibility, patient queues, gate
-                security — and to build custom software for companies whose needs go beyond that.
+                To help schools, contractors, hospitals, and factories solve everyday operational
+                problems with practical software — and to build custom systems for businesses
+                whose needs go beyond standard products.
               </p>
-              <ul className="mv-points">
-                {missionPoints.map((point, index) => (
-                  <li key={index}><span><FaCheck /></span> {point}</li>
-                ))}
-              </ul>
             </div>
 
             <div className="mv-card vision-card">
               <div className="mv-icon"><FaCompass /></div>
               <h3>Our Vision</h3>
               <p>
-                To be the go-to ready-made software provider for Indian schools, construction
-                sites, hospitals, and factories — known for fast deployment and software that
-                actually gets used, not just installed.
+                To become a trusted software partner for Indian businesses by delivering products
+                that are fast to deploy, simple to use, and valuable enough to become part of
+                everyday operations.
               </p>
-              <ul className="mv-points">
-                {visionPoints.map((point, index) => (
-                  <li key={index}><span><FaCheck /></span> {point}</li>
-                ))}
-              </ul>
+            </div>
+          </div>
+
+          <div className="mv-principles reveal">
+            <h3 className="mv-principles-title">Our Operating Principles</h3>
+            <ul className="mv-principles-list">
+              {operatingPrinciples.map((point, index) => (
+                <li key={index}><span><FaCheck /></span> {point}</li>
+              ))}
+            </ul>
+            <div className="mv-principles-cta">
+              <Link to="/#how-it-works" className="btn btn-secondary">
+                <span>See how we work</span>
+                <span className="btn-icon">→</span>
+              </Link>
             </div>
           </div>
         </div>
@@ -369,7 +293,7 @@ const professionals = [
       <section className="core-values">
         <div className="container">
           <div className="values-header reveal">
-            <SectionBadge icon=<FaGem /> text="What We Stand For" />
+            <SectionBadge icon={<FaGem />} text="What We Stand For" />
             <h2 className="section-title">Our Core <span>Values</span></h2>
             <p className="section-subtitle">
               These principles guide our decisions, shape our culture, and define
@@ -385,80 +309,30 @@ const professionals = [
         </div>
       </section>
 
-      {/* Our Story / Timeline Section */}
-      <section className="our-story">
-        <div className="container">
-          <div className="story-header reveal">
-            <SectionBadge icon=<FaBookOpen /> text="Our Journey" />
-            <h2 className="section-title">The RUDHISOFT <span>Story</span></h2>
+      {/* Leadership Team — moved to its own page, see /leadership */}
+      <section className="leadership" style={{ paddingBottom: '20px' }}>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <div className="leadership-header reveal">
+            <SectionBadge icon={<FaUsers />} text="Meet Our Leaders" />
+            <h2 className="section-title">Leadership <span>Team</span></h2>
             <p className="section-subtitle">
-              From humble beginnings to a global technology partner — explore
-              the milestones that shaped who we are today.
+              Meet the founders and core team driving RUDHISOFT forward.
             </p>
           </div>
-
-          <div className="timeline">
-            {timeline.map((item, index) => (
-              <TimelineItem key={index} {...item} isEven={index % 2 === 1} />
-            ))}
-          </div>
+          <Link to="/leadership" className="btn btn-primary">
+            <span>Meet the team</span>
+            <span className="btn-icon">→</span>
+          </Link>
         </div>
       </section>
 
-      {/* Leadership Team Section */}
-<section className="leadership">
-  <div className="container">
-    <div className="leadership-header reveal">
-      <SectionBadge icon=<FaUsers /> text="Meet Our Leaders" />
-      <h2 className="section-title">Leadership <span>Team</span></h2>
-      <p className="section-subtitle">
-        The visionaries driving RUDHISOFT forward — meet the experienced
-        professionals leading our mission.
-      </p>
-    </div>
-
-    {/* Founders Row */}
-    <div className="founders-grid stagger-children">
-      {founders.map((member, index) => (
-        <TeamCard key={index} {...member} />
-      ))}
-    </div>
-
-    {/* Professionals Row */}
-    <div className="professionals-header reveal" style={{ textAlign: 'center', margin: '60px 0 30px' }}>
-      <h3 style={{ fontSize: '1.8rem', fontWeight: '700' }}>Our <span style={{ color: 'var(--primary, #6366f1)' }}>Professionals</span></h3>
-    </div>
-
-    <div className="professionals-grid stagger-children">
-      {professionals.map((member, index) => (
-        <div key={index} className="professional-card">
-          <div className="professional-image">
-            <img src={member.image} alt={member.name} loading="lazy" />
-          </div>
-          <h4 className="professional-name">{member.name}</h4>
-          <p className="professional-role">{member.role}</p>
-        </div>
-      ))}
-    </div>
-
-    {/* Extended Team */}
-    <div className="extended-team reveal">
-      <div className="extended-team-header">
-        <h3>Our Expert Teams</h3>
-        <p>Beyond leadership, we have dedicated teams of specialists across every domain.</p>
-      </div>
-      <div className="extended-team-grid">
-        {extendedTeam.map((team, index) => (
-          <ExtendedTeamItem key={index} {...team} />
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* Achievements Section */}
+      {/* Metrics Section */}
       <section className="achievements">
+
         <div className="container">
+          <div className="achievements-header reveal">
+            <h2 className="section-title">Our Work in <span>Numbers</span></h2>
+          </div>
           <div className="achievements-grid stagger-children">
             {achievements.map((achievement, index) => (
               <AchievementItem key={index} {...achievement} />
@@ -472,23 +346,23 @@ const professionals = [
         <div className="container">
           <div className="culture-grid">
             <div className="culture-content reveal-left">
-              <SectionBadge icon=<FaStar /> text="Life at RUDHISOFT" />
-              <h2 className="section-title">Our <span>Culture</span></h2>
+              <SectionBadge icon={<FaStar />} text="Life at RUDHISOFT" />
+              <h2 className="section-title">We Build Products and Careers with <span>Ownership</span></h2>
               <p className="culture-text">
-                At RUDHISOFT, we believe that great work comes from great people working in
-                an environment where they can thrive. Our culture is built on trust, creativity,
-                and continuous learning.
+                At Rudhisoft, team members work on real software used by schools, contractors,
+                hospitals, and industrial businesses. We value ownership, open communication,
+                continuous learning, and practical problem-solving.
               </p>
               <p className="culture-text">
-                We foster an inclusive workplace where diverse perspectives are celebrated,
-                ideas are encouraged, and everyone has the opportunity to make an impact.
+                Our team members have opportunities to work across product discovery, development,
+                testing, deployment, customer feedback, and ongoing improvement.
               </p>
 
-              <div className="culture-features">
-                {cultureFeatures.map((feature, index) => (
-                  <CultureFeature key={index} {...feature} />
+              <ul className="mv-points culture-bullets">
+                {cultureBullets.map((point, index) => (
+                  <li key={index}><span><FaCheck /></span> {point}</li>
                 ))}
-              </div>
+              </ul>
             </div>
 
             <div className="culture-images reveal-right">
@@ -502,20 +376,16 @@ const professionals = [
         </div>
       </section>
 
-      {/* Why Work With Us Section */}
+      {/* Why Customers Work With Rudhisoft Section */}
       <section className="why-work-with-us">
         <div className="container">
           <div className="why-work-header reveal">
-            <SectionBadge icon=<FaHandshake /> text="Partner With Us" />
-            <h2 className="section-title">Why Work With <span>RUDHISOFT?</span></h2>
-            <p className="section-subtitle">
-              Discover what makes us different and why leading companies
-              choose us as their technology partner.
-            </p>
+            <SectionBadge icon={<FaHandshake />} text="Partner With Us" />
+            <h2 className="section-title">Why Customers Work With <span>Rudhisoft</span></h2>
           </div>
 
           <div className="why-work-grid stagger-children">
-            {whyWorkWithUs.map((item, index) => (
+            {whyCustomersWorkWithUs.map((item, index) => (
               <WhyWorkCard key={index} {...item} />
             ))}
           </div>
@@ -526,18 +396,18 @@ const professionals = [
       <section className="cta">
         <div className="container">
           <div className="cta-content reveal">
-            <h2 className="cta-title">Ready to See Which Product Fits You?</h2>
+            <h2 className="cta-title">Have an Operational Problem You Want to Solve?</h2>
             <p className="cta-text">
-              Whether it's RudhiCore, RudhiArch, our Hospital Management System, Industry
-              Security System, or a custom build — let's talk. Get a free 20-min consultation.
+              Tell us what your team is managing manually. We'll help you identify whether one of
+              our products fits or whether a custom solution is the better option.
             </p>
             <div className="cta-buttons">
-              <Link to="/contact" className="btn btn-primary">
-                <span>Get in Touch</span>
+              <Link to="/#products" className="btn btn-primary">
+                <span>Explore our products</span>
                 <span className="btn-icon">→</span>
               </Link>
-              <Link to="/services" className="btn btn-secondary">
-                <span>Explore Services</span>
+              <Link to="/contact" className="btn btn-secondary">
+                <span>Book a consultation</span>
                 <span className="btn-icon"><FaClipboardList /></span>
               </Link>
             </div>
