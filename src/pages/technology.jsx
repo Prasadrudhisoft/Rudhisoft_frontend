@@ -211,12 +211,12 @@ function useScrollReveal() {
 
 function Hero() {
   return (
-    <section className="page-hero">
+    <section className="tech-hero">
       <div className="container">
-        <div className="page-hero-content">
-          <span className="page-hero-badge"><FaLaptopCode /> Technology at Rudhisoft</span>
-          <h1 className="page-hero-title">The right technology for reliable business software.</h1>
-          <p className="page-hero-subtitle">
+        <div className="tech-hero-content">
+          <span className="tech-hero-badge"><FaLaptopCode /> Technology at Rudhisoft</span>
+          <h1 className="tech-hero-title">The right technology for reliable business software.</h1>
+          <p className="tech-hero-subtitle">
             We select proven technologies based on your business goals, security requirements,
             integration needs, expected scale, and long-term maintenance.
           </p>

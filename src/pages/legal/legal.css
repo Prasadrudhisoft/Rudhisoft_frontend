@@ -11,7 +11,7 @@
   --gray-700: #374151;
   --gray-900: #111827;
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: 'Space Grotesk', sans-serif;
+  --font-display: var(--font-primary);
 }
 
 /* ── 404 Page ─────────────────────────────────────────────────────── */

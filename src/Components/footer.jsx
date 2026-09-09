@@ -113,11 +113,10 @@ const Footer = () => {
             </p>
 
             <div className="footer-social">
-              {/* NOTE: replace these href="#" values with your actual profile URLs */}
-              <a href="#" aria-label="LinkedIn"><FaLinkedin /></a>
+              <a href="https://www.linkedin.com/in/Rudhisoft%20Private%20Limited" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
               <a href="#" aria-label="Twitter"><FaTwitter /></a>
               <a href="#" aria-label="GitHub"><FaGithub /></a>
-              <a href="#" aria-label="Instagram"><FaInstagram /></a>
+              <a href="https://www.instagram.com/rudhisoftpvtltd" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
             </div>
           </div>
 
@@ -186,7 +185,7 @@ const Footer = () => {
               <div className="footer-contact-icon"><FaMapMarkerAlt /></div>
               <div className="footer-contact-text">
                 <a
-                  href="https://www.google.com/maps/place/Rudhisoft+Private+Limited/@20.0089107,73.7639885,17z"
+                  href="https://www.google.com/maps/place/Rudhisoft+Private+Limited/data=!4m2!3m1!1s0x0:0x78a8e1b3f866db1f?sa=X&ved=1t:2428&ictx=111"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

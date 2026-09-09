@@ -42,7 +42,7 @@ function buildMessage({ company, service, budget, phone, message }) {
 const contactCards = [
   { icon: <FaEnvelope />, title: 'Email Us', sub: 'For general inquiries', link: 'mailto:director@rudhisoft.com', linkLabel: 'director@rudhisoft.com' },
   { icon: <FaPhoneAlt />, title: 'Call Us', sub: 'Mon-Fri, 9am-6pm IST', link: 'tel:+919766149500', linkLabel: '+91 97661 49500' },
-  { icon: <FaMapMarkerAlt />, title: 'Visit Us', sub: 'Our Office Location', text: '13, Maruti Plaza, Vidya Vikas Circle, Gangapur Rd, Nashik, Maharashtra 422005' },
+  { icon: <FaMapMarkerAlt />, title: 'Visit Us', sub: 'Our Office Location', link: 'https://www.google.com/maps/place/Rudhisoft+Private+Limited/data=!4m2!3m1!1s0x0:0x78a8e1b3f866db1f?sa=X&ved=1t:2428&ictx=111', linkLabel: '13, Maruti Plaza, Vidya Vikas Circle, Gangapur Rd, Nashik, Maharashtra 422005' },
   { icon: <FaHeadset />, title: 'Support', sub: 'For existing clients', link: 'mailto:director@rudhisoft.com', linkLabel: 'director@rudhisoft.com' },
 ];
 
@@ -268,7 +268,7 @@ function ContactSection() {
                     <h3>{card.title}</h3>
                     <p>{card.sub}</p>
                     {card.link
-                      ? <a href={card.link}>{card.linkLabel}</a>
+                      ? <a href={card.link} target={card.link.startsWith('http') ? '_blank' : undefined} rel={card.link.startsWith('http') ? 'noopener noreferrer' : undefined}>{card.linkLabel}</a>
                       : <span>{card.text}</span>
                     }
                   </div>
@@ -279,8 +279,14 @@ function ContactSection() {
             <div className="contact-social">
               <h4>Follow Us</h4>
               <div className="social-links">
-                {[[<FaLinkedin />, 'LinkedIn'], [<FaTwitter />, 'Twitter'], [<FaGithub />, 'GitHub'], [<FaInstagram />, 'Instagram'], [<FaYoutube />, 'YouTube']].map(([icon, name]) => (
-                  <a key={name} href="#" className="social-link" aria-label={name}>{icon}</a>
+                {[
+                  [<FaLinkedin />, 'LinkedIn', 'https://www.linkedin.com/in/Rudhisoft%20Private%20Limited'],
+                  [<FaTwitter />, 'Twitter', '#'],
+                  [<FaGithub />, 'GitHub', '#'],
+                  [<FaInstagram />, 'Instagram', 'https://www.instagram.com/rudhisoftpvtltd'],
+                  [<FaYoutube />, 'YouTube', '#'],
+                ].map(([icon, name, url]) => (
+                  <a key={name} href={url} target={url !== '#' ? '_blank' : undefined} rel={url !== '#' ? 'noopener noreferrer' : undefined} className="social-link" aria-label={name}>{icon}</a>
                 ))}
               </div>
             </div>

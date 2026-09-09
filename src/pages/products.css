@@ -31,7 +31,7 @@
   --gray-900: #111827;
 
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: 'Space Grotesk', sans-serif;
+  --font-display: var(--font-primary);
 
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -80,6 +80,21 @@
   color:#fafcff;
 }
 .product-page .btn-secondary:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-3px); }
+
+/* Hero on product pages (pp-hero) has a light background, so the
+   secondary CTA (e.g. "Get pricing", "Get a site workflow blueprint")
+   needs dark text instead of the near-white default meant for dark
+   hero/CTA backgrounds. !important guards against any other rule
+   (e.g. .product-page .btn-secondary) winning on equal specificity. */
+.pp-hero .btn-secondary {
+  color: #000000 !important;
+  border-color: #000000 !important;
+}
+.pp-hero .btn-secondary:hover {
+  background: var(--primary) !important;
+  color: var(--white) !important;
+  border-color: var(--primary) !important;
+}
 
 .product-page .section-badge {
   display: inline-flex;

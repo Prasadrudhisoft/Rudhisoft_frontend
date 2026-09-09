@@ -86,10 +86,8 @@ export const organizationSchema = {
     addressCountry: 'IN',
   },
   sameAs: [
-    // Add real profile URLs here, e.g.:
-    // 'https://www.linkedin.com/company/rudhisoft',
-    // 'https://twitter.com/rudhisoft',
-    // 'https://github.com/rudhisoft',
+    'https://www.instagram.com/rudhisoftpvtltd',
+    'https://www.linkedin.com/in/Rudhisoft%20Private%20Limited',
   ],
 };
 
@@ -111,6 +109,7 @@ export const localBusinessSchema = {
   },
   areaServed: 'IN',
   priceRange: '$$',
+  hasMap: 'https://www.google.com/maps/place/Rudhisoft+Private+Limited/data=!4m2!3m1!1s0x0:0x78a8e1b3f866db1f?sa=X&ved=1t:2428&ictx=111',
 };
 
 export function breadcrumbSchema(items) {

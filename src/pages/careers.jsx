@@ -4,7 +4,7 @@ import axios from 'axios';
 import celebrationImg from '../assets/images/celebration.jpg';
 import teamCultureImg from '../assets/images/team-culture.jpg';
 import './careers.css';
-import { FaBalanceScale, FaBirthdayCake, FaBook, FaBriefcase, FaCheck, FaClipboardList, FaFileAlt, FaFistRaised, FaGift, FaGlassCheers, FaHandshake, FaHome, FaHospital, FaLightbulb, FaMapMarkerAlt, FaMoneyBillWave, FaPencilAlt, FaRocket, FaSearch, FaStar, FaTimes, FaUmbrellaBeach } from 'react-icons/fa';
+import { FaBalanceScale, FaBook, FaBriefcase, FaCheck, FaClipboardList, FaFileAlt, FaGift, FaGlassCheers, FaHandshake, FaHome, FaLightbulb, FaMapMarkerAlt, FaMoneyBillWave, FaPencilAlt, FaRocket, FaSearch, FaStar, FaTimes } from 'react-icons/fa';
 
 // ── Config ───────────────────────────────────────────────────────────────────
 const API_URL = 'https://admin.rudhisoft.com';
@@ -19,13 +19,9 @@ const whyJoinCards = [
 
 const benefitsList = [
   { icon: <FaMoneyBillWave />, label: 'Competitive Salary' },
-  { icon: <FaHospital />, label: 'Health Insurance' },
   { icon: <FaHome />, label: 'Remote Work Options' },
   { icon: <FaBook />, label: 'Learning Budget' },
-  { icon: <FaUmbrellaBeach />, label: 'Paid Time Off' },
   { icon: <FaGlassCheers />, label: 'Team Events' },
-  { icon: <FaFistRaised />, label: 'Gym Membership' },
-  { icon: <FaBirthdayCake />, label: 'Birthday Leave' },
 ];
 
 const cultureItems = [
@@ -116,7 +112,7 @@ function Benefits() {
               />
             </div>
             <div className="benefits-badge">
-              <h4>50+</h4>
+              <h4>10+</h4>
               <p>Happy Employees</p>
             </div>
           </div>
@@ -214,8 +210,37 @@ function OpenPositions({ onApply }) {
   );
 }
 
+// ── Success Popup ────────────────────────────────────────────────────────────
+function SuccessPopup({ isOpen, jobTitle, onClose }) {
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = e => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', onKey);
+    const timer = setTimeout(onClose, 5000);
+    return () => { document.removeEventListener('keydown', onKey); clearTimeout(timer); };
+  }, [isOpen, onClose]);
+
+  return (
+    <div
+      className={`modal-overlay success-popup-overlay${isOpen ? ' active' : ''}`}
+      onClick={e => { if (e.target.classList.contains('modal-overlay')) onClose(); }}
+    >
+      <div className="modal success-popup" role="alertdialog" aria-modal="true" aria-labelledby="successHeading">
+        <button className="modal-close" onClick={onClose} aria-label="Close"><FaTimes /></button>
+        <div className="success-popup-icon"><FaCheck /></div>
+        <h2 id="successHeading">Application Submitted Successfully!</h2>
+        <p>
+          Thanks for applying{jobTitle ? <> for <strong>{jobTitle}</strong></> : ''}. Our team will review your
+          application and get back to you soon.
+        </p>
+        <button className="btn btn-primary" onClick={onClose}>Done</button>
+      </div>
+    </div>
+  );
+}
+
 // ── Application Modal ─────────────────────────────────────────────────────────
-function ApplicationModal({ isOpen, jobId, jobTitle, onClose }) {
+function ApplicationModal({ isOpen, jobId, jobTitle, onClose, onSuccess }) {
   const [formData, setFormData] = useState({ applicant_name: '', applicant_email: '', phone: '', cover_letter: '' });
   const [resumeFile, setResumeFile] = useState(null);
   const [dragOver, setDragOver] = useState(false);
@@ -287,9 +312,9 @@ function ApplicationModal({ isOpen, jobId, jobTitle, onClose }) {
       });
 
       if (data.success) {
-        setMessage({ type: 'success', text: data.message || 'Application submitted successfully!' });
         resetForm();
-        setTimeout(() => { onClose(); }, 3000);
+        onClose();
+        onSuccess(jobTitle);
       } else {
         setMessage({ type: 'error', text: data.message || 'Submission failed. Please try again.' });
       }
@@ -472,6 +497,7 @@ export default function CareersPage() {
 
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [modal, setModal] = useState({ open: false, jobId: null, jobTitle: '' });
+  const [successPopup, setSuccessPopup] = useState({ open: false, jobTitle: '' });
 
   useEffect(() => {
     const onScroll = () => setShowBackToTop(window.scrollY > 300);
@@ -488,6 +514,14 @@ export default function CareersPage() {
 
   const closeModal = useCallback(() => {
     setModal({ open: false, jobId: null, jobTitle: '' });
+  }, []);
+
+  const handleApplicationSuccess = useCallback((title) => {
+    setSuccessPopup({ open: true, jobTitle: title });
+  }, []);
+
+  const closeSuccessPopup = useCallback(() => {
+    setSuccessPopup({ open: false, jobTitle: '' });
   }, []);
 
   return (
@@ -514,6 +548,13 @@ export default function CareersPage() {
         jobId={modal.jobId}
         jobTitle={modal.jobTitle}
         onClose={closeModal}
+        onSuccess={handleApplicationSuccess}
+      />
+
+      <SuccessPopup
+        isOpen={successPopup.open}
+        jobTitle={successPopup.jobTitle}
+        onClose={closeSuccessPopup}
       />
     </>
   );

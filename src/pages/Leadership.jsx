@@ -5,6 +5,9 @@ import './products.css';
 import SEO, { organizationSchema, breadcrumbSchema } from '../Components/SEO';
 import atulImg from '../assets/images/atul.jpg';
 import shubhamImg from '../assets/images/shubham.jpg';
+import omImg from '../assets/images/om.png';
+import hritikImg from '../assets/images/hritik.jpeg';
+
 import { FaHandshake, FaLinkedin, FaUsers } from 'react-icons/fa';
 
 const PATH = '/leadership';
@@ -33,6 +36,8 @@ const founders = [
 const professionals = [
   { name: 'Atul', image: atulImg },
   { name: 'Shubham', image: shubhamImg },
+  { name: 'Om', image: omImg },
+  { name: 'Hritik', image: hritikImg },
 ];
 
 function initials(name) {

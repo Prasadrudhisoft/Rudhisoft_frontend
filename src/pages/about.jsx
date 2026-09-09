@@ -19,7 +19,7 @@ const SectionBadge = ({ icon, text }) => (
 
 const IntroStat = ({ number, label }) => (
   <div className="intro-stat">
-    <div className="intro-stat-number">{number}</div>
+    <div className="intro-stat-number">{number}</div>284\
     <div className="intro-stat-label">{label}</div>
   </div>
 );

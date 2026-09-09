@@ -24,6 +24,33 @@ function useScrollReveal() {
   }, []);
 }
 
+function CaseStudyCard({ cs, i }) {
+  return (
+    <Link to={`/case-studies/${cs.slug}`} className="cs-card ip-reveal" style={{ '--i': i }}>
+      <div className="cs-card-tags">
+        <span className="cs-card-tag">{cs.product.name}</span>
+        <span className="cs-card-tag cs-card-tag-industry">{cs.industryTag}</span>
+      </div>
+
+      <h3>{cs.title}</h3>
+
+      <div className="cs-card-summary">
+        <p><strong>Challenge:</strong> {cs.challengeSummary}</p>
+        <p><strong>Solution:</strong> {cs.solutionSummary}</p>
+      </div>
+
+      <div className="cs-card-results">
+        <strong>Results:</strong>
+        {cs.outcomes.slice(0, 3).map((o) => (
+          <p className="cs-outcome-preview" key={o}>{o}</p>
+        ))}
+      </div>
+
+      <span className="read-more">Read the case study →</span>
+    </Link>
+  );
+}
+
 export default function CaseStudiesListing() {
   const productStudies = getCaseStudiesByType('product');
   const customStudies = getCaseStudiesByType('custom');
@@ -44,16 +71,20 @@ export default function CaseStudiesListing() {
       {/* HERO */}
       <section className="cs-hero">
         <div className="container">
-          <h1 className="ip-reveal">Real Results, By Product</h1>
-          <p className="ip-reveal">See how schools, contractors, hospitals, and factories use our software — and what custom builds looked like for companies that needed more.</p>
+          <span className="cs-hero-eyebrow ip-reveal">Customer Stories</span>
+          <h1 className="ip-reveal">How businesses use Rudhisoft to improve everyday operations</h1>
+          <p className="ip-reveal">
+            Explore real implementations across education, construction, healthcare, manufacturing, and custom software.
+          </p>
+          <p className="cs-hero-secondary ip-reveal">
+            We focus on practical outcomes: less manual work, better visibility, faster processing, and software that
+            teams use every day.
+          </p>
         </div>
       </section>
 
       <div className="container">
-        {/* <FaExclamationTriangle /> Remove this banner once real client data replaces placeholders below */}
-        <div className="cs-placeholder-banner ip-reveal">
-          <FaExclamationTriangle /> Coming soon <code>src/data/caseStudies.js</code> 
-        </div>
+    
 
         {/* PRODUCT CASE STUDIES */}
         <div className="cs-section">
@@ -62,14 +93,7 @@ export default function CaseStudiesListing() {
           </div>
           <div className="cs-grid ip-reveal-stagger">
             {productStudies.map((cs, i) => (
-              <Link to={`/case-studies/${cs.slug}`} className="cs-card ip-reveal" style={{ '--i': i }} key={cs.slug}>
-                <span className="cs-card-tag">{cs.product.name}</span>
-                <h3>{cs.title}</h3>
-                {cs.outcomes.slice(0, 2).map((o) => (
-                  <p className="cs-outcome-preview" key={o}>{o}</p>
-                ))}
-                <span className="read-more">Read case study →</span>
-              </Link>
+              <CaseStudyCard cs={cs} i={i} key={cs.slug} />
             ))}
           </div>
         </div>
@@ -81,15 +105,21 @@ export default function CaseStudiesListing() {
           </div>
           <div className="cs-grid ip-reveal-stagger">
             {customStudies.map((cs, i) => (
-              <Link to={`/case-studies/${cs.slug}`} className="cs-card ip-reveal" style={{ '--i': i }} key={cs.slug}>
-                <span className="cs-card-tag">Custom Build</span>
-                <h3>{cs.title}</h3>
-                {cs.outcomes.slice(0, 2).map((o) => (
-                  <p className="cs-outcome-preview" key={o}>{o}</p>
-                ))}
-                <span className="read-more">Read case study →</span>
-              </Link>
+              <CaseStudyCard cs={cs} i={i} key={cs.slug} />
             ))}
+          </div>
+        </div>
+
+        {/* FINAL CTA */}
+        <div className="cs-final-cta ip-reveal">
+          <h2>Want similar results in your business?</h2>
+          <p>
+            Tell us about your workflow, current challenges, and goals. We'll help you identify the right Rudhisoft
+            product or custom software approach.
+          </p>
+          <div className="cs-final-cta-buttons">
+            <Link to="/contact" className="btn btn-primary">Book a Consultation</Link>
+            <Link to="/products" className="btn btn-secondary">Explore Our Products</Link>
           </div>
         </div>
       </div>

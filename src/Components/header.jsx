@@ -39,9 +39,12 @@ export default function Header() {
   const isHome = location.pathname === "/";
 
   // ✅ true on any page whose hero has a dark video/gradient background
-  // (currently: the 4 Industry pages) — these also need white nav text
-  // before scrolling, same as the homepage.
-  const hasDarkHero = isHome || location.pathname.startsWith("/industries/");
+  // (currently: the 4 Industry pages + Technology) — these also need white
+  // nav text before scrolling, same as the homepage.
+  const hasDarkHero =
+    isHome ||
+    location.pathname.startsWith("/industries/") ||
+    location.pathname === "/technology";
 
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);

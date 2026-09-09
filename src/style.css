@@ -1,5 +1,5 @@
 /* Global base styles — RUDHISOFT design system.
-   Typography: Inter (body) + Space Grotesk (headings) everywhere,
+   Typography: Inter everywhere (body + headings),
    matching the tokens declared in each page's own CSS file. */
 
 :root {
@@ -52,7 +52,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-weight: 600;
   margin: 0;
 }

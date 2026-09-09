@@ -26,7 +26,7 @@
   --gray-900: #111827;
 
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: 'Space Grotesk', sans-serif;
+  --font-display: var(--font-primary);
 
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -310,7 +310,7 @@ nav { display: flex; align-items: center; }
 /* =========================
    PAGE HERO
 ========================== */
-.page-hero {
+.tech-hero {
   position: relative;
   padding: 160px 0 100px;
   min-height: 70vh;
@@ -321,30 +321,30 @@ nav { display: flex; align-items: center; }
      base64 data URI. No external image file is needed, so there's nothing
      to 404 or mismatch on case-sensitive hosts. Swap this out any time for
      a real photo by pointing background-image at your own asset instead. */
-  background-color: var(--primary-dark);
+  /* background-color: var(--primary-dark); */
   background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwMCIgaGVpZ2h0PSI5MDAiIHZpZXdCb3g9IjAgMCAxNjAwIDkwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMWExZDVhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTUlIiBzdG9wLWNvbG9yPSIjMmUzMTkyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFhMWQ1YSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iZ2xvdzEiIGN4PSIyMCUiIGN5PSI4MCUiIHI9IjYwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwMGQ0ZmYiIHN0b3Atb3BhY2l0eT0iMC4zNSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMGQ0ZmYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iZ2xvdzIiIGN4PSI4MCUiIGN5PSIxNSUiIHI9IjU1JSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM3YzNhZWQiIHN0b3Atb3BhY2l0eT0iMC4zNSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM3YzNhZWQiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICAgIDxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8cGF0aCBkPSJNIDY0IDAgTCAwIDAgMCA2NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utb3BhY2l0eT0iMC4wNiIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgICA8L3BhdHRlcm4+CiAgPC9kZWZzPgoKICA8cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSI5MDAiIGZpbGw9InVybCgjYmcpIi8+CiAgPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2dyaWQpIi8+CiAgPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2dsb3cxKSIvPgogIDxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnbG93MikiLz4KCiAgPGcgc3Ryb2tlPSIjMDBkNGZmIiBzdHJva2Utb3BhY2l0eT0iMC41IiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSI+CiAgICA8cGF0aCBkPSJNIDEwMCA3MDAgTCAzMDAgNzAwIEwgMzQwIDY2MCBMIDU2MCA2NjAgTCA2MDAgNjIwIEwgODIwIDYyMCIvPgogICAgPHBhdGggZD0iTSAxNTAwIDE1MCBMIDEzMDAgMTUwIEwgMTI2MCAxOTAgTCAxMDQwIDE5MCBMIDEwMDAgMjMwIEwgNzgwIDIzMCIvPgogICAgPHBhdGggZD0iTSAyMDAgMjAwIEwgMjAwIDMyMCBMIDI2MCAzODAgTCAyNjAgNTAwIi8+CiAgICA8cGF0aCBkPSJNIDE0MDAgNTUwIEwgMTQwMCA0MzAgTCAxMzQwIDM3MCBMIDEzNDAgMjYwIi8+CiAgPC9nPgoKICA8ZyBmaWxsPSIjMDBkNGZmIiBmaWxsLW9wYWNpdHk9IjAuODUiPgogICAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iNzAwIiByPSI1Ii8+CiAgICA8Y2lyY2xlIGN4PSIzNDAiIGN5PSI2NjAiIHI9IjQiLz4KICAgIDxjaXJjbGUgY3g9IjYwMCIgY3k9IjYyMCIgcj0iNSIvPgogICAgPGNpcmNsZSBjeD0iODIwIiBjeT0iNjIwIiByPSI0Ii8+CiAgICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjQiLz4KICAgIDxjaXJjbGUgY3g9IjI2MCIgY3k9IjUwMCIgcj0iNSIvPgogIDwvZz4KICA8ZyBmaWxsPSIjN2MzYWVkIiBmaWxsLW9wYWNpdHk9IjAuODUiPgogICAgPGNpcmNsZSBjeD0iMTUwMCIgY3k9IjE1MCIgcj0iNSIvPgogICAgPGNpcmNsZSBjeD0iMTI2MCIgY3k9IjE5MCIgcj0iNCIvPgogICAgPGNpcmNsZSBjeD0iNzgwIiBjeT0iMjMwIiByPSI1Ii8+CiAgICA8Y2lyY2xlIGN4PSIxNDAwIiBjeT0iNTUwIiByPSI1Ii8+CiAgICA8Y2lyY2xlIGN4PSIxMzQwIiBjeT0iMjYwIiByPSI0Ii8+CiAgPC9nPgoKICA8ZyBmaWxsPSIjZmJiZjI0IiBmaWxsLW9wYWNpdHk9IjAuNSI+CiAgICA8Y2lyY2xlIGN4PSI0ODAiIGN5PSIxNDAiIHI9IjIuNSIvPgogICAgPGNpcmNsZSBjeD0iMTEyMCIgY3k9Ijc0MCIgcj0iMi41Ii8+CiAgICA8Y2lyY2xlIGN4PSI5MDAiIGN5PSI4MCIgcj0iMiIvPgogICAgPGNpcmNsZSBjeD0iMTQwIiBjeT0iNDQwIiByPSIyIi8+CiAgICA8Y2lyY2xlIGN4PSIxNTUwIiBjeT0iNzIwIiByPSIyLjUiLz4KICA8L2c+Cjwvc3ZnPgo=");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   color: white;
 }
-.page-hero::before {
+.tech-hero::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background:
+  /* background:
     linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
     radial-gradient(circle at 20% 80%, rgba(0,212,255,0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(124,58,237,0.15) 0%, transparent 50%);
+    radial-gradient(circle at 80% 20%, rgba(124,58,237,0.15) 0%, transparent 50%); */
 }
-.page-hero-content {
+.tech-hero-content {
   position: relative;
   z-index: 1;
   text-align: center;
   max-width: 700px;
   margin: 0 auto;
 }
-.page-hero-badge {
+.tech-hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -358,7 +358,7 @@ nav { display: flex; align-items: center; }
   margin-bottom: 20px;
   backdrop-filter: blur(10px);
 }
-.page-hero-title {
+.tech-hero-title {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 7vw, 4.5rem);
   font-weight: 700;
@@ -366,7 +366,7 @@ nav { display: flex; align-items: center; }
   margin-bottom: 20px;
   line-height: 1.1;
 }
-.page-hero-subtitle {
+.tech-hero-subtitle {
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: rgba(255,255,255,0.85);
   line-height: 1.7;
@@ -374,10 +374,10 @@ nav { display: flex; align-items: center; }
   margin: 0 auto;
 }
 @media (max-width: 768px) {
-  .page-hero { padding: 130px 0 70px; }
-  .page-hero-badge { font-size: 0.8rem; padding: 8px 16px; }
+  .tech-hero { padding: 130px 0 70px; }
+  .tech-hero-badge { font-size: 0.8rem; padding: 8px 16px; }
 }
-@media (max-width: 480px) { .page-hero { padding: 120px 0 60px; } }
+@media (max-width: 480px) { .tech-hero { padding: 120px 0 60px; } }
 
 /* =========================
    HOW WE CHOOSE TECHNOLOGY
